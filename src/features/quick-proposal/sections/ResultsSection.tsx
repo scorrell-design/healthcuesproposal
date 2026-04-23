@@ -14,8 +14,8 @@ import {
 } from '@/constants/proposalCopy';
 import type { TierResult } from '@/features/proposal/types/proposal.types';
 
-const ACCENT = '#5ECEB0';
-const BG = '#0B1220';
+const ACCENT = '#3F7FF4';
+const BG = '#0F172A';
 const CARD_BG = 'rgba(255,255,255,0.04)';
 const CARD_BORDER = '1px solid rgba(255,255,255,0.08)';
 const MUTED = 'rgba(255,255,255,0.5)';
@@ -35,7 +35,7 @@ interface TierPaycheckData {
   fedAfter: number;
   stateAfter: number;
   ficaAfter: number;
-  synrgyBenefit: number;
+  planBenefit: number;
   netAfter: number;
   increase: number;
   pctIncrease: number;
@@ -94,7 +94,7 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
     const ficaAfter = taxableAfter * ficaRate;
     const adminPerPay = ADMIN_FEE_ANNUAL / periods;
     const netAfterRaw = taxableAfter - fedAfter - stateAfter - ficaAfter;
-    const synrgyBenefit = (netAfterRaw - netBefore);
+    const planBenefit = (netAfterRaw - netBefore);
     const netAfter = netAfterRaw;
 
     const increase = netAfter - netBefore;
@@ -114,7 +114,7 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
       fedAfter: r2(fedAfter),
       stateAfter: r2(stateAfter),
       ficaAfter: r2(ficaAfter),
-      synrgyBenefit: r2(synrgyBenefit),
+      planBenefit: r2(planBenefit),
       netAfter: r2(netAfter),
       increase: r2(increase),
       pctIncrease: Math.round(pctIncrease * 100) / 100,
@@ -169,7 +169,7 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
   const activePaycheck = activePaycheckTab === 'benefit' ? benefittingEmployee : nonBenefittingEmployee;
 
   return (
-    <div id="results" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: BG, borderRadius: 20, overflow: 'hidden' }}>
+    <div id="results" style={{ fontFamily: "'Poppins', system-ui, sans-serif", background: BG, borderRadius: 20, overflow: 'hidden' }}>
       {/* B1 — Sticky Header */}
       <div
         style={{
@@ -188,7 +188,7 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <ShieldCheck size={22} style={{ color: ACCENT }} />
-          <span style={{ fontWeight: 600, fontSize: 18, color: '#fff' }}>The SYNRGY Plan</span>
+          <span style={{ fontWeight: 600, fontSize: 18, color: '#fff' }}>HealthCues Plan</span>
         </div>
         <button
           style={{
@@ -213,7 +213,7 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
             <ShieldCheck size={64} style={{ color: ACCENT, margin: '0 auto' }} />
           </div>
           <h1 style={{ fontWeight: 700, fontSize: 36, color: '#fff', margin: 0 }}>
-            Your Customized SYNRGY Proposal
+            Your Customized Proposal
           </h1>
           <div style={{ width: 80, height: 2, background: ACCENT, margin: '12px auto 16px' }} />
           <span
@@ -247,7 +247,7 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
                 key={b}
                 style={{
                   background: CARD_BG,
-                  border: `1px solid rgba(94,206,176,0.2)`,
+                  border: `1px solid rgba(63,127,244,0.2)`,
                   padding: '10px 20px',
                   borderRadius: 9999,
                   fontWeight: 500,
@@ -327,8 +327,8 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
                         </GlassCard>
 
                         {/* With SYNRGY */}
-                        <GlassCard inner style={{ borderColor: `rgba(94,206,176,0.2)` }}>
-                          <h4 style={{ fontWeight: 600, fontSize: 14, color: ACCENT, marginBottom: 16, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Paycheck with SYNRGY</h4>
+                        <GlassCard inner style={{ borderColor: `rgba(63,127,244,0.2)` }}>
+                          <h4 style={{ fontWeight: 600, fontSize: 14, color: ACCENT, marginBottom: 16, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Paycheck with Plan</h4>
                           <PaySection title="Earnings">
                             <PayRow label="Gross Pay" value={activePaycheck.grossPay} />
                           </PaySection>
@@ -340,8 +340,8 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
                             <PayRow label="State Withholding" value={-activePaycheck.stateAfter} negative />
                             <PayRow label="FICA (7.65%)" value={-activePaycheck.ficaAfter} negative />
                           </PaySection>
-                          <PaySection title="SYNRGY Benefit">
-                            <PayRow label="Tax Savings Benefit" value={activePaycheck.synrgyBenefit} accent />
+                          <PaySection title="Plan Benefit">
+                            <PayRow label="Tax Savings Benefit" value={activePaycheck.planBenefit} accent />
                           </PaySection>
                           <div style={{ height: 1, background: 'rgba(255,255,255,0.1)', margin: '12px 0' }} />
                           <div>
@@ -682,7 +682,7 @@ function PayRow({ label, value, bold, negative, accent, green }: {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '3px 0', fontSize: bold ? 16 : 13 }}>
       <span style={{ color: accent ? ACCENT : 'rgba(255,255,255,0.7)' }}>{label}</span>
-      <span style={{ fontFamily: 'Inter', fontWeight: bold ? 700 : 500, color }}>{displayValue}</span>
+      <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: bold ? 700 : 500, color }}>{displayValue}</span>
     </div>
   );
 }

@@ -75,7 +75,7 @@ export function QuickProposalPage({ groupId = 'demo' }: QuickProposalPageProps) 
       <div className="mx-auto max-w-6xl px-4 py-8">
         <div
           className="mb-6 flex items-center gap-2 rounded-lg px-4 py-2.5"
-          style={{ background: 'rgba(0, 95, 120, 0.05)', border: '1px solid rgba(0, 95, 120, 0.15)' }}
+          style={{ background: 'rgba(63, 127, 244, 0.05)', border: '1px solid rgba(63, 127, 244, 0.15)' }}
         >
           <Info size={15} className="flex-shrink-0 text-accent" style={{ opacity: 0.7 }} />
           <p className="text-[12px] leading-snug text-text-tertiary">{DISCLAIMER_TEXT}</p>
@@ -100,7 +100,7 @@ export function QuickProposalPage({ groupId = 'demo' }: QuickProposalPageProps) 
                   disabled={!canGenerate}
                   className="inline-flex items-center gap-2 transition-all"
                   style={{
-                    background: canGenerate ? '#C95A38' : 'rgba(201, 90, 56, 0.3)',
+                    background: canGenerate ? '#3F7FF4' : 'rgba(63, 127, 244, 0.3)',
                     color: '#FFFFFF',
                     borderRadius: 24,
                     padding: '16px 40px',
@@ -109,10 +109,10 @@ export function QuickProposalPage({ groupId = 'demo' }: QuickProposalPageProps) 
                     border: 'none',
                     cursor: canGenerate ? 'pointer' : 'not-allowed',
                     opacity: canGenerate ? 1 : 0.4,
-                    boxShadow: canGenerate ? '0 4px 16px rgba(201, 90, 56, 0.2)' : 'none',
+                    boxShadow: canGenerate ? '0 4px 16px rgba(63, 127, 244, 0.2)' : 'none',
                   }}
-                  onMouseEnter={(e) => { if (canGenerate) e.currentTarget.style.boxShadow = '0 6px 24px rgba(201, 90, 56, 0.3)'; }}
-                  onMouseLeave={(e) => { if (canGenerate) e.currentTarget.style.boxShadow = '0 4px 16px rgba(201, 90, 56, 0.2)'; }}
+                  onMouseEnter={(e) => { if (canGenerate) e.currentTarget.style.boxShadow = '0 6px 24px rgba(63, 127, 244, 0.3)'; }}
+                  onMouseLeave={(e) => { if (canGenerate) e.currentTarget.style.boxShadow = '0 4px 16px rgba(63, 127, 244, 0.2)'; }}
                 >
                   Generate Proposal
                   <ArrowRight size={20} />

@@ -10,7 +10,7 @@ export function GlassBackground({ children }: { children: React.ReactNode }) {
             left: '-5%',
             width: '60%',
             height: '55%',
-            background: 'radial-gradient(ellipse at center, rgba(0, 95, 120, 0.04) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse at center, rgba(63, 127, 244, 0.04) 0%, transparent 70%)',
             filter: 'blur(160px)',
           }}
         />
@@ -21,7 +21,7 @@ export function GlassBackground({ children }: { children: React.ReactNode }) {
             right: '-10%',
             width: '55%',
             height: '60%',
-            background: 'radial-gradient(ellipse at center, rgba(201, 90, 56, 0.03) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse at center, rgba(47, 191, 143, 0.03) 0%, transparent 70%)',
             filter: 'blur(180px)',
           }}
         />
@@ -32,7 +32,7 @@ export function GlassBackground({ children }: { children: React.ReactNode }) {
             right: '5%',
             width: '35%',
             height: '40%',
-            background: 'radial-gradient(ellipse at center, rgba(0, 95, 120, 0.02) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse at center, rgba(63, 127, 244, 0.02) 0%, transparent 70%)',
             filter: 'blur(140px)',
           }}
         />
@@ -48,8 +48,8 @@ export function GlassBackground({ children }: { children: React.ReactNode }) {
             width: 240,
             height: 64,
             borderRadius: 32,
-            background: 'rgba(0, 95, 120, 0.02)',
-            border: '1px solid rgba(0, 95, 120, 0.04)',
+            background: 'rgba(63, 127, 244, 0.02)',
+            border: '1px solid rgba(63, 127, 244, 0.04)',
             transform: 'rotate(-15deg)',
           }}
         />
@@ -61,8 +61,8 @@ export function GlassBackground({ children }: { children: React.ReactNode }) {
             width: 100,
             height: 100,
             borderRadius: '50%',
-            background: 'rgba(0, 95, 120, 0.015)',
-            border: '1px solid rgba(0, 95, 120, 0.03)',
+            background: 'rgba(63, 127, 244, 0.015)',
+            border: '1px solid rgba(63, 127, 244, 0.03)',
           }}
         />
         <div
@@ -73,8 +73,8 @@ export function GlassBackground({ children }: { children: React.ReactNode }) {
             width: 120,
             height: 36,
             borderRadius: 18,
-            background: 'rgba(0, 95, 120, 0.015)',
-            border: '1px solid rgba(0, 95, 120, 0.03)',
+            background: 'rgba(63, 127, 244, 0.015)',
+            border: '1px solid rgba(63, 127, 244, 0.03)',
             transform: 'rotate(8deg)',
           }}
         />

@@ -32,10 +32,10 @@ export function DisclaimerModal({ open, onAccept, onGoBack }: DisclaimerModalPro
               style={{
                 maxWidth: 520,
                 background: '#FFFFFF',
-                border: '1px solid #D9CFC0',
+                border: '1px solid #E6EEF6',
                 borderRadius: 22,
                 padding: 32,
-                boxShadow: '0 16px 48px rgba(26, 58, 66, 0.15)',
+                boxShadow: '0 16px 48px rgba(15, 23, 42, 0.15)',
               }}
             >
               <AlertCircle size={28} style={{ color: '#D97706', margin: '0 auto' }} />
@@ -77,7 +77,7 @@ export function DisclaimerModal({ open, onAccept, onGoBack }: DisclaimerModalPro
                   onClick={onAccept}
                   className="w-full transition-all"
                   style={{
-                    background: '#C95A38',
+                    background: '#3F7FF4',
                     color: '#FFFFFF',
                     borderRadius: 24,
                     padding: '14px 24px',
@@ -87,7 +87,7 @@ export function DisclaimerModal({ open, onAccept, onGoBack }: DisclaimerModalPro
                     cursor: 'pointer',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = '0 4px 16px rgba(201, 90, 56, 0.25)';
+                    e.currentTarget.style.boxShadow = '0 4px 16px rgba(63, 127, 244, 0.25)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.boxShadow = 'none';

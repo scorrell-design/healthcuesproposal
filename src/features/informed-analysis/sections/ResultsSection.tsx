@@ -77,7 +77,7 @@ export function IAResultsSection({
         {/* Disclaimer Banner */}
         <div
           className="flex items-center gap-2 rounded-lg px-4 py-2.5"
-          style={{ background: 'rgba(0, 95, 120, 0.05)', border: '1px solid rgba(0, 95, 120, 0.15)' }}
+          style={{ background: 'rgba(63, 127, 244, 0.05)', border: '1px solid rgba(63, 127, 244, 0.15)' }}
         >
           <Info size={15} className="flex-shrink-0 text-accent" style={{ opacity: 0.7 }} />
           <p className="text-[12px] leading-snug text-text-tertiary">{DISCLAIMER_TEXT}</p>

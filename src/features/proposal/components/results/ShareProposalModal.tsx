@@ -59,7 +59,7 @@ Documents included:
 This proposal is for informational purposes only and represents projected estimates based on the data provided. Please review and let me know if you have any questions.
 
 Best regards,
-Your Benefits Advisor`;
+The HealthCues Team`;
   }, [companyName, proposalUrl, password, proposalLabel]);
 
   const [editableEmail, setEditableEmail] = useState(emailBody);
@@ -120,10 +120,10 @@ Your Benefits Advisor`;
                   maxWidth: 640,
                   maxHeight: '90vh',
                   background: '#FFFFFF',
-                  border: '1px solid #D9CFC0',
+                  border: '1px solid #E6EEF6',
                   borderRadius: 22,
                   padding: 32,
-                  boxShadow: '0 16px 48px rgba(26, 58, 66, 0.15)',
+                  boxShadow: '0 16px 48px rgba(15, 23, 42, 0.15)',
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
@@ -240,7 +240,7 @@ Your Benefits Advisor`;
                     disabled={!email.trim() || sending}
                     className="inline-flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
                     style={{
-                      background: '#C95A38',
+                      background: '#3F7FF4',
                       color: '#FFFFFF',
                       borderRadius: 24,
                       padding: '10px 24px',

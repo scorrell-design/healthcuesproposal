@@ -32,8 +32,8 @@ export function MethodologyPanel({ factors, conservative, optimal, onClose }: Me
         className="fixed right-0 top-0 z-[101] flex h-full w-full max-w-xl flex-col overflow-y-auto"
         style={{
           background: '#FFFFFF',
-          borderLeft: '1px solid #D9CFC0',
-          boxShadow: '-8px 0 32px rgba(26, 58, 66, 0.1)',
+          borderLeft: '1px solid #E6EEF6',
+          boxShadow: '-8px 0 32px rgba(15, 23, 42, 0.1)',
         }}
       >
         <div className="flex items-center justify-between border-b border-border-glass-light px-6 py-5">
@@ -59,7 +59,7 @@ export function MethodologyPanel({ factors, conservative, optimal, onClose }: Me
                   <p className="text-[15px] font-semibold text-text-primary">{factor.name}</p>
                   <span
                     className="inline-flex items-center rounded-full px-2.5 py-0.5 text-[12px] font-medium text-text-tertiary"
-                    style={{ background: '#FAF5EC' }}
+                    style={{ background: '#F6F9FC' }}
                   >
                     {factor.weight}%
                   </span>
@@ -67,8 +67,8 @@ export function MethodologyPanel({ factors, conservative, optimal, onClose }: Me
                 <p className="text-[14px] text-text-secondary mb-4">{factor.description}</p>
 
                 {/* Impact bar */}
-                <div className="relative h-6 rounded-full overflow-hidden" style={{ background: '#FAF5EC' }}>
-                  <div className="absolute inset-y-0 left-1/2 w-px" style={{ background: '#D9CFC0' }} />
+                <div className="relative h-6 rounded-full overflow-hidden" style={{ background: '#F6F9FC' }}>
+                  <div className="absolute inset-y-0 left-1/2 w-px" style={{ background: '#E6EEF6' }} />
                   {/* Conservative (left of center) */}
                   <div
                     className="absolute inset-y-0 rounded-l-full"
@@ -84,7 +84,7 @@ export function MethodologyPanel({ factors, conservative, optimal, onClose }: Me
                     style={{
                       left: '50%',
                       width: `${rightPct}%`,
-                      background: 'rgba(0, 95, 120, 0.25)',
+                      background: 'rgba(63, 127, 244, 0.25)',
                     }}
                   />
                 </div>

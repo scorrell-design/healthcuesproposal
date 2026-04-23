@@ -69,14 +69,14 @@ export function BenefitsSection() {
       <div className="flex items-center justify-between mb-4">
         <span
           className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[12px] font-medium text-text-secondary"
-          style={{ background: '#E8F1F4', border: '1px solid rgba(0, 95, 120, 0.2)' }}
+          style={{ background: '#E8F0FE', border: '1px solid rgba(63, 127, 244, 0.2)' }}
         >
           Using preset values based on U.S. national averages
         </span>
         <button
           onClick={handleResetToDefaults}
           className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-medium text-text-secondary hover:text-text-primary transition-colors"
-          style={{ background: '#FAF5EC', border: '1px solid #D9CFC0' }}
+          style={{ background: '#F6F9FC', border: '1px solid #E6EEF6' }}
         >
           <RotateCcw size={13} />
           Reset to Industry Average
@@ -87,7 +87,7 @@ export function BenefitsSection() {
         <button
           onClick={() => setBenefits({ enabled: !benefits.enabled })}
           className="relative h-6 w-11 rounded-full transition-colors flex-shrink-0"
-          style={{ background: benefits.enabled ? 'var(--color-accent)' : '#D9CFC0' }}
+          style={{ background: benefits.enabled ? 'var(--color-accent)' : '#E6EEF6' }}
         >
           <span
             className="absolute left-0 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform"

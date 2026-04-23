@@ -37,7 +37,7 @@ export function SavingsSpectrum({ range, proposalType }: SavingsSpectrumProps) {
             ref={buttonRef}
             onClick={() => setShowPopover(!showPopover)}
             className="flex h-7 w-7 items-center justify-center rounded-full transition-colors hover:bg-surface-glass-hover"
-            style={{ border: '1px solid rgba(0, 95, 120, 0.3)' }}
+            style={{ border: '1px solid rgba(63, 127, 244, 0.3)' }}
             title="How we calculate your savings range"
           >
             <Info size={16} className="text-accent" />
@@ -53,10 +53,10 @@ export function SavingsSpectrum({ range, proposalType }: SavingsSpectrumProps) {
                 className="absolute left-0 top-full z-50 mt-2 w-80"
                 style={{
                   background: '#FFFFFF',
-                  border: '1px solid #D9CFC0',
+                  border: '1px solid #E6EEF6',
                   borderRadius: 12,
                   padding: 14,
-                  boxShadow: '0 8px 24px rgba(26, 58, 66, 0.12)',
+                  boxShadow: '0 8px 24px rgba(15, 23, 42, 0.12)',
                 }}
               >
                 <p className="text-[13px] leading-[1.6] text-text-secondary">
@@ -88,21 +88,21 @@ export function SavingsSpectrum({ range, proposalType }: SavingsSpectrumProps) {
             className="h-full"
             style={{
               width: isQP ? '25%' : '17.5%',
-              background: 'linear-gradient(90deg, #D9CFC0, #E8E0D4)',
+              background: 'linear-gradient(90deg, #E6EEF6, #D4E4F4)',
             }}
           />
           <div
             className="h-full"
             style={{
               width: isQP ? '50%' : '65%',
-              background: 'linear-gradient(90deg, rgba(0, 95, 120, 0.25), rgba(0, 95, 120, 0.12))',
+              background: 'linear-gradient(90deg, rgba(63, 127, 244, 0.25), rgba(63, 127, 244, 0.12))',
             }}
           />
           <div
             className="h-full"
             style={{
               width: isQP ? '25%' : '17.5%',
-              background: 'linear-gradient(90deg, rgba(201, 90, 56, 0.2), rgba(201, 90, 56, 0.1))',
+              background: 'linear-gradient(90deg, rgba(63, 127, 244, 0.2), rgba(63, 127, 244, 0.1))',
             }}
           />
         </div>
@@ -112,8 +112,8 @@ export function SavingsSpectrum({ range, proposalType }: SavingsSpectrumProps) {
           className="absolute top-0 flex flex-col items-center"
           style={{ left: '50%', transform: 'translateX(-50%)' }}
         >
-          <div className="h-12 w-0.5" style={{ background: '#1A3A42' }} />
-          <div className="mt-[-2px] h-2 w-2 rotate-45" style={{ background: '#1A3A42' }} />
+          <div className="h-12 w-0.5" style={{ background: '#0F172A' }} />
+          <div className="mt-[-2px] h-2 w-2 rotate-45" style={{ background: '#0F172A' }} />
         </div>
       </div>
 
@@ -124,7 +124,7 @@ export function SavingsSpectrum({ range, proposalType }: SavingsSpectrumProps) {
           <p className="mt-1 text-[12px] text-text-tertiary">{PROPOSAL_LABELS.RANGE_LOW}</p>
           <p className="mt-0.5 text-[11px] text-text-tertiary">If participation is lower than expected</p>
         </div>
-        <div className="glass-secondary text-center !border-accent-border" style={{ boxShadow: '0 0 24px rgba(0, 95, 120, 0.06)' }}>
+        <div className="glass-secondary text-center !border-accent-border" style={{ boxShadow: '0 0 24px rgba(63, 127, 244, 0.06)' }}>
           <p className="font-mono text-[22px] font-bold text-accent">{formatDollar(range.projected)}</p>
           <p className="mt-1 text-[12px] text-accent-muted">{PROPOSAL_LABELS.RANGE_MID}</p>
           <p className="mt-0.5 text-[11px] text-text-tertiary">Based on your inputs</p>

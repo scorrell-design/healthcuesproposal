@@ -96,7 +96,7 @@ export function EmployeeLookup({ employees, employeeResults, payPeriodsPerYear }
               key={e.employeeId}
               onClick={() => { setSelectedId(e.employeeId); setSearch(''); }}
               className="rounded-full px-3.5 py-1.5 text-[13px] font-medium text-text-secondary transition-colors hover:bg-surface-glass-light"
-              style={{ background: '#FAF5EC', border: '1px solid #D9CFC0' }}
+              style={{ background: '#F6F9FC', border: '1px solid #E6EEF6' }}
             >
               {e.name}
             </button>
@@ -127,7 +127,7 @@ export function EmployeeLookup({ employees, employeeResults, payPeriodsPerYear }
           {/* Increase badge */}
           <div
             className="glass-secondary text-center !border-accent-border mb-4"
-            style={{ boxShadow: '0 0 24px rgba(0, 95, 120, 0.08)', maxWidth: 340, margin: '0 auto 20px' }}
+            style={{ boxShadow: '0 0 24px rgba(63, 127, 244, 0.08)', maxWidth: 340, margin: '0 auto 20px' }}
           >
             <p className="font-mono text-[28px] font-bold text-accent">
               +{formatDollarCents(calc.increase)}
@@ -159,7 +159,7 @@ export function EmployeeLookup({ employees, employeeResults, payPeriodsPerYear }
               <Line label="State Tax" value={-calc.stateAfter} dim saved={calc.stateSaved} />
               <Line label="FICA" value={-calc.ficaAfter} dim saved={calc.ficaSaved} />
               <div className="glass-divider my-2" />
-              <div className="rounded-md px-2 py-0.5 -mx-2" style={{ background: 'rgba(0, 95, 120, 0.06)' }}>
+              <div className="rounded-md px-2 py-0.5 -mx-2" style={{ background: 'rgba(63, 127, 244, 0.06)' }}>
                 <Line label="Section 125 Benefit" value={calc.increase} accent />
               </div>
               <Line label="Net Pay" value={calc.netAfter} bold green />

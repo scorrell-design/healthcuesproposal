@@ -36,7 +36,7 @@ export function ProgressSidebar({ sections, activeSection, onNavigate }: Progres
                     height: 28,
                     background: prevComplete && section.isComplete
                       ? 'var(--color-success)'
-                      : '#D9CFC0',
+                      : '#E6EEF6',
                     transition: 'background 300ms',
                   }}
                 />
@@ -57,8 +57,8 @@ export function ProgressSidebar({ sections, activeSection, onNavigate }: Progres
                         : 'transparent',
                     border: section.isComplete || isActive
                       ? 'none'
-                      : '1px solid #D9CFC0',
-                    boxShadow: isActive ? '0 0 12px rgba(0, 95, 120, 0.15)' : 'none',
+                      : '1px solid #E6EEF6',
+                    boxShadow: isActive ? '0 0 12px rgba(63, 127, 244, 0.15)' : 'none',
                   }}
                 >
                   {section.isComplete && <Check className="h-2.5 w-2.5 text-white" strokeWidth={3} />}
@@ -89,7 +89,7 @@ export function ProgressSidebar({ sections, activeSection, onNavigate }: Progres
             <circle
               cx="20" cy="20" r="18"
               fill="none"
-              stroke="#D9CFC0"
+              stroke="#E6EEF6"
               strokeWidth="2.5"
             />
             <circle
