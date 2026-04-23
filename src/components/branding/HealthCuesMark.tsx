@@ -1,0 +1,15 @@
+export const HealthCuesMark = ({ size = 40 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 80 80" fill="none"
+       xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="hc-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#2FBF8F"/>
+        <stop offset="100%" stopColor="#3F7FF4"/>
+      </linearGradient>
+    </defs>
+    <path d="M40 8 C50 20, 50 32, 40 40 C30 32, 30 20, 40 8 Z" fill="url(#hc-grad)"/>
+    <path d="M72 40 C60 50, 48 50, 40 40 C48 30, 60 30, 72 40 Z" fill="url(#hc-grad)" opacity="0.95"/>
+    <path d="M40 72 C30 60, 30 48, 40 40 C50 48, 50 60, 40 72 Z" fill="url(#hc-grad)" opacity="0.9"/>
+    <path d="M8 40 C20 30, 32 30, 40 40 C32 50, 20 50, 8 40 Z" fill="url(#hc-grad)" opacity="0.85"/>
+  </svg>
+);
