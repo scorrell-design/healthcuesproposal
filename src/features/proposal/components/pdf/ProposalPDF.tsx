@@ -3,68 +3,70 @@ import { PDFSavingsSpectrum } from './PDFSavingsSpectrum';
 import type { CompanyInfo, ProposalResult } from '../../types/proposal.types';
 
 Font.register({
-  family: 'Geist',
+  family: 'Poppins',
   fonts: [
-    { src: 'https://cdn.jsdelivr.net/fontsource/fonts/geist-sans@latest/latin-400-normal.ttf', fontWeight: 400 },
-    { src: 'https://cdn.jsdelivr.net/fontsource/fonts/geist-sans@latest/latin-500-normal.ttf', fontWeight: 500 },
-    { src: 'https://cdn.jsdelivr.net/fontsource/fonts/geist-sans@latest/latin-600-normal.ttf', fontWeight: 600 },
-    { src: 'https://cdn.jsdelivr.net/fontsource/fonts/geist-sans@latest/latin-700-normal.ttf', fontWeight: 700 },
+    { src: 'https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-400-normal.ttf', fontWeight: 400 },
+    { src: 'https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-500-normal.ttf', fontWeight: 500 },
+    { src: 'https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-600-normal.ttf', fontWeight: 600 },
+    { src: 'https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-700-normal.ttf', fontWeight: 700 },
   ],
 });
 
-const TEAL = '#005F78';
-const TEAL_SOFT = '#E8F1F4';
-const ORANGE = '#C95A38';
-const CREAM = '#F5EDE1';
-const CREAM_SOFT = '#FAF5EC';
-const INK = '#1A3A42';
-const MUTED = '#5A6E73';
-const BORDER = '#D9CFC0';
+const BLUE = '#3F7FF4';
+const BLUE_SOFT = '#E8F0FE';
+const GREEN = '#2FBF8F';
+const INK = '#0F172A';
+const MUTED = '#475569';
+const TEXT_MUTED = '#94A3B8';
+const BORDER = '#E6EEF6';
 
 const s = StyleSheet.create({
   page: {
     paddingTop: 0,
     paddingBottom: 60,
     paddingHorizontal: 48,
-    fontFamily: 'Geist',
+    fontFamily: 'Poppins',
     fontSize: 10,
     color: INK,
-    backgroundColor: CREAM,
+    backgroundColor: '#FFFFFF',
   },
-  headerBand: {
+  gradientBar: {
     marginHorizontal: -48,
     marginTop: 0,
-    paddingHorizontal: 48,
-    paddingVertical: 20,
-    backgroundColor: TEAL,
+    height: 8,
+    backgroundColor: BLUE,
+  },
+  headerArea: {
+    marginTop: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: 72,
   },
   headerBrandText: {
-    fontSize: 14,
-    fontWeight: 500,
-    color: '#FFFFFF',
-    letterSpacing: 2.1,
+    fontSize: 16,
+    fontWeight: 700,
+    color: INK,
+  },
+  headerBrandNormal: {
+    fontWeight: 400,
   },
   headerEyebrow: {
     fontSize: 10,
     fontWeight: 500,
-    color: 'rgba(255,255,255,0.8)',
+    color: TEXT_MUTED,
     letterSpacing: 1,
     textTransform: 'uppercase',
   },
   companyName: {
     fontSize: 28,
-    fontWeight: 500,
-    color: TEAL,
-    marginTop: 24,
+    fontWeight: 700,
+    color: INK,
+    marginTop: 20,
   },
-  orangeBar: {
+  blueRule: {
     width: 60,
-    height: 3,
-    backgroundColor: ORANGE,
+    height: 2,
+    backgroundColor: BLUE,
     marginTop: 8,
     marginBottom: 8,
   },
@@ -90,21 +92,21 @@ const s = StyleSheet.create({
   },
   kpiCard: {
     flex: 1,
-    backgroundColor: TEAL_SOFT,
+    backgroundColor: BLUE_SOFT,
     borderRadius: 6,
     padding: 12,
-    borderLeft: `3 solid ${TEAL}`,
+    borderLeft: `3 solid ${BLUE}`,
   },
   kpiLabel: {
     fontSize: 9,
-    color: TEAL,
+    color: BLUE,
     textTransform: 'uppercase',
-    fontWeight: 500,
+    fontWeight: 600,
     letterSpacing: 0.7,
   },
   kpiValue: {
     fontSize: 24,
-    fontWeight: 600,
+    fontWeight: 700,
     color: INK,
     marginTop: 4,
   },
@@ -137,21 +139,27 @@ const s = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 14,
-    fontWeight: 500,
-    color: TEAL,
-    marginBottom: 4,
+    fontWeight: 600,
+    color: INK,
+    marginBottom: 2,
+  },
+  sectionTitleRule: {
+    width: 40,
+    height: 0.5,
+    backgroundColor: BLUE,
+    marginBottom: 6,
   },
   tierHeader: {
     flexDirection: 'row',
-    backgroundColor: TEAL_SOFT,
+    backgroundColor: BLUE,
     padding: 8,
     borderRadius: 4,
   },
   tierHeaderCell: {
     flex: 1,
     fontSize: 8,
-    fontWeight: 500,
-    color: TEAL,
+    fontWeight: 600,
+    color: '#FFFFFF',
     textTransform: 'uppercase',
     letterSpacing: 0.3,
   },
@@ -164,7 +172,7 @@ const s = StyleSheet.create({
     flexDirection: 'row',
     padding: 8,
     borderBottom: `0.5 solid ${BORDER}`,
-    backgroundColor: CREAM_SOFT,
+    backgroundColor: '#F6F9FC',
   },
   tierCell: {
     flex: 1,
@@ -175,7 +183,7 @@ const s = StyleSheet.create({
     flex: 1,
     fontSize: 10,
     fontWeight: 600,
-    color: TEAL,
+    color: GREEN,
   },
   tierMethodology: {
     fontSize: 8,
@@ -189,7 +197,7 @@ const s = StyleSheet.create({
   },
   preparedByLabel: {
     fontSize: 8,
-    color: MUTED,
+    color: TEXT_MUTED,
     textTransform: 'uppercase',
     letterSpacing: 0.5,
   },
@@ -201,7 +209,7 @@ const s = StyleSheet.create({
   },
   preparedByEmail: {
     fontSize: 9,
-    color: TEAL,
+    color: BLUE,
     marginTop: 1,
   },
   disclaimerSection: {
@@ -211,8 +219,8 @@ const s = StyleSheet.create({
   },
   disclaimerTitle: {
     fontSize: 13,
-    fontWeight: 500,
-    color: TEAL,
+    fontWeight: 600,
+    color: INK,
     marginBottom: 6,
   },
   disclaimerText: {
@@ -233,14 +241,13 @@ const s = StyleSheet.create({
     alignItems: 'center',
   },
   footerText: {
-    fontSize: 8,
-    color: MUTED,
+    fontSize: 7,
+    color: TEXT_MUTED,
   },
   footerBrand: {
-    fontSize: 8,
-    color: TEAL,
-    fontWeight: 500,
-    letterSpacing: 1,
+    fontSize: 7,
+    color: BLUE,
+    fontWeight: 600,
   },
 });
 
@@ -263,24 +270,29 @@ export function ProposalPDF({ company, result, proposalType, brokerName, brokerE
   return (
     <Document>
       <Page size="LETTER" style={s.page}>
-        {/* Header Band */}
-        <View style={s.headerBand}>
-          <Text style={s.headerBrandText}>SYNRGY</Text>
+        {/* Gradient cover bar */}
+        <View style={s.gradientBar} />
+
+        {/* Header */}
+        <View style={s.headerArea}>
+          <Text style={s.headerBrandText}>
+            Health<Text style={s.headerBrandNormal}>Cues</Text>
+          </Text>
           <Text style={s.headerEyebrow}>Section 125 Proposal</Text>
         </View>
 
         {/* Company Info */}
         <Text style={s.companyName}>{company.name || 'Company'}</Text>
-        <View style={s.orangeBar} />
+        <View style={s.blueRule} />
         <Text style={s.subtitle}>Section 125 Cafeteria Plan — Tax Savings Proposal</Text>
         <Text style={s.dateLine}>{date} · {company.employeeCount} employees</Text>
         {brokerName ? (
-          <Text style={[s.dateLine, { marginTop: 2 }]}>Prepared by {brokerName}</Text>
+          <Text style={[s.dateLine, { marginTop: 2, fontSize: 10, color: TEXT_MUTED }]}>Prepared by {brokerName}</Text>
         ) : null}
 
         <View style={s.divider} />
 
-        {/* KPI Cards — Fix #1: three cards with Total Combined first */}
+        {/* KPI Cards */}
         <View style={s.kpiRow}>
           <View style={s.kpiCard}>
             <Text style={s.kpiLabel}>Total Combined Annual Savings</Text>
@@ -299,7 +311,7 @@ export function ProposalPDF({ company, result, proposalType, brokerName, brokerE
           </View>
         </View>
 
-        {/* Qualified / Positively Impacted — Fix #3: updated label */}
+        {/* Qualified / Positively Impacted */}
         <View style={s.qualRow}>
           <View style={s.qualCard}>
             <Text style={s.qualValue}>{result.qualifiedEmployees} of {result.totalEmployees} ({qualifiedPct}%)</Text>
@@ -318,6 +330,7 @@ export function ProposalPDF({ company, result, proposalType, brokerName, brokerE
 
         {/* Tier Breakdown */}
         <Text style={s.sectionTitle}>Tier Breakdown</Text>
+        <View style={s.sectionTitleRule} />
         <Text style={{ fontSize: 9, color: MUTED, marginBottom: 8 }}>Estimates based on provided data</Text>
         <View style={s.tierHeader}>
           <Text style={s.tierHeaderCell}>Tier</Text>
@@ -336,7 +349,6 @@ export function ProposalPDF({ company, result, proposalType, brokerName, brokerE
             </View>
           );
         })}
-        {/* Fix #4: methodology note */}
         <Text style={s.tierMethodology}>
           Tier FICA savings assume average pre-tax contributions consistent with typical Section 125 plan participation.
         </Text>
@@ -350,7 +362,7 @@ export function ProposalPDF({ company, result, proposalType, brokerName, brokerE
           </View>
         )}
 
-        {/* Disclosures — Fixes #2, #5 */}
+        {/* Disclosures */}
         <View style={s.disclaimerSection}>
           <Text style={s.disclaimerTitle}>Important Disclosures</Text>
           <Text style={s.disclaimerText}>
@@ -373,10 +385,10 @@ export function ProposalPDF({ company, result, proposalType, brokerName, brokerE
         {/* Footer */}
         <View style={s.footer} fixed>
           <Text style={s.footerText}>
-            Section 125 Cafeteria Plan Tax Savings Proposal · Generated {date}
+            Prepared by HealthCues · Section 125 Analysis
           </Text>
-          <Text style={s.footerBrand}>SYNRGY</Text>
-          <Text style={s.footerText} render={({ pageNumber, totalPages }) => `Page ${pageNumber} of ${totalPages}`} />
+          <Text style={s.footerBrand}>HealthCues</Text>
+          <Text style={s.footerText} render={({ pageNumber, totalPages }) => `${pageNumber} / ${totalPages}`} />
         </View>
       </Page>
     </Document>

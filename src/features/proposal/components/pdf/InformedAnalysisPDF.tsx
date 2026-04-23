@@ -5,12 +5,12 @@ import type { ProposalResult, SavingsRange } from '../../types/proposal.types';
 import type { EmployeeResult } from '@/features/informed-analysis/engine/mini-analyzer';
 
 Font.register({
-  family: 'Geist',
+  family: 'Poppins',
   fonts: [
-    { src: 'https://cdn.jsdelivr.net/fontsource/fonts/geist-sans@latest/latin-400-normal.ttf', fontWeight: 400 },
-    { src: 'https://cdn.jsdelivr.net/fontsource/fonts/geist-sans@latest/latin-500-normal.ttf', fontWeight: 500 },
-    { src: 'https://cdn.jsdelivr.net/fontsource/fonts/geist-sans@latest/latin-600-normal.ttf', fontWeight: 600 },
-    { src: 'https://cdn.jsdelivr.net/fontsource/fonts/geist-sans@latest/latin-700-normal.ttf', fontWeight: 700 },
+    { src: 'https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-400-normal.ttf', fontWeight: 400 },
+    { src: 'https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-500-normal.ttf', fontWeight: 500 },
+    { src: 'https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-600-normal.ttf', fontWeight: 600 },
+    { src: 'https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-700-normal.ttf', fontWeight: 700 },
   ],
 });
 
@@ -22,45 +22,48 @@ const s = StyleSheet.create({
     paddingTop: 0,
     paddingBottom: 60,
     paddingHorizontal: 48,
-    fontFamily: 'Geist',
+    fontFamily: 'Poppins',
     fontSize: 10,
     color: BRAND.ink,
-    backgroundColor: BRAND.cream,
+    backgroundColor: BRAND.white,
   },
-  headerBand: {
+  gradientBar: {
     marginHorizontal: -48,
     marginTop: 0,
-    paddingHorizontal: 48,
-    paddingVertical: 20,
-    backgroundColor: BRAND.teal,
+    height: 8,
+    backgroundColor: BRAND.blue,
+  },
+  headerArea: {
+    marginTop: 16,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: 72,
   },
   headerBrandText: {
-    fontSize: 14,
-    fontWeight: 500,
-    color: BRAND.white,
-    letterSpacing: 2.1,
+    fontSize: 16,
+    fontWeight: 700,
+    color: BRAND.ink,
+  },
+  headerBrandNormal: {
+    fontWeight: 400,
   },
   headerEyebrow: {
     fontSize: 10,
     fontWeight: 500,
-    color: 'rgba(255,255,255,0.8)',
+    color: BRAND.textMuted,
     letterSpacing: 1,
     textTransform: 'uppercase',
   },
   groupName: {
     fontSize: 28,
-    fontWeight: 500,
-    color: BRAND.teal,
-    marginTop: 24,
+    fontWeight: 700,
+    color: BRAND.ink,
+    marginTop: 20,
   },
-  orangeBar: {
+  blueRule: {
     width: 60,
-    height: 3,
-    backgroundColor: BRAND.orange,
+    height: 2,
+    backgroundColor: BRAND.blue,
     marginTop: 8,
     marginBottom: 8,
   },
@@ -69,10 +72,10 @@ const s = StyleSheet.create({
     color: BRAND.muted,
   },
   censusBadge: {
-    backgroundColor: BRAND.teal,
+    backgroundColor: BRAND.blue,
     color: BRAND.white,
     fontSize: 9,
-    fontWeight: 500,
+    fontWeight: 600,
     letterSpacing: 1.2,
     textTransform: 'uppercase',
     paddingVertical: 4,
@@ -88,7 +91,7 @@ const s = StyleSheet.create({
   },
   divider: {
     height: 0.5,
-    backgroundColor: BRAND.border,
+    backgroundColor: BRAND.cardBorder,
     marginVertical: 14,
   },
   kpiRow: {
@@ -99,21 +102,21 @@ const s = StyleSheet.create({
   },
   kpiCard: {
     flex: 1,
-    backgroundColor: BRAND.tealSoft,
+    backgroundColor: '#E8F0FE',
     borderRadius: 6,
     padding: 12,
-    borderLeft: `3 solid ${BRAND.teal}`,
+    borderLeft: `3 solid ${BRAND.blue}`,
   },
   kpiLabel: {
     fontSize: 9,
-    color: BRAND.teal,
+    color: BRAND.blue,
     textTransform: 'uppercase',
-    fontWeight: 500,
+    fontWeight: 600,
     letterSpacing: 0.7,
   },
   kpiValue: {
     fontSize: 24,
-    fontWeight: 600,
+    fontWeight: 700,
     color: BRAND.ink,
     marginTop: 4,
   },
@@ -123,8 +126,8 @@ const s = StyleSheet.create({
     marginTop: 2,
   },
   precisionCallout: {
-    backgroundColor: BRAND.tealSoft,
-    borderLeft: `3 solid ${BRAND.teal}`,
+    backgroundColor: '#E8F0FE',
+    borderLeft: `3 solid ${BRAND.blue}`,
     borderRadius: 6,
     padding: 12,
     marginBottom: 14,
@@ -136,9 +139,15 @@ const s = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 16,
-    fontWeight: 500,
-    color: BRAND.teal,
-    marginBottom: 4,
+    fontWeight: 600,
+    color: BRAND.ink,
+    marginBottom: 2,
+  },
+  sectionTitleRule: {
+    width: 40,
+    height: 0.5,
+    backgroundColor: BRAND.blue,
+    marginBottom: 6,
   },
   sectionCaption: {
     fontSize: 9,
@@ -147,27 +156,27 @@ const s = StyleSheet.create({
   },
   tableHeader: {
     flexDirection: 'row',
-    backgroundColor: BRAND.tealSoft,
+    backgroundColor: BRAND.blue,
     padding: 8,
     borderRadius: 4,
   },
   tableHeaderCell: {
     fontSize: 8,
-    fontWeight: 500,
-    color: BRAND.teal,
+    fontWeight: 600,
+    color: BRAND.white,
     textTransform: 'uppercase',
     letterSpacing: 0.3,
   },
   tableRow: {
     flexDirection: 'row',
     padding: 8,
-    borderBottom: `0.5 solid ${BRAND.border}`,
+    borderBottom: `0.5 solid ${BRAND.cardBorder}`,
   },
   tableRowAlt: {
     flexDirection: 'row',
     padding: 8,
-    borderBottom: `0.5 solid ${BRAND.border}`,
-    backgroundColor: BRAND.creamSoft,
+    borderBottom: `0.5 solid ${BRAND.cardBorder}`,
+    backgroundColor: BRAND.pageBgSoft,
   },
   tableCell: {
     fontSize: 9,
@@ -176,11 +185,11 @@ const s = StyleSheet.create({
   tableCellAccent: {
     fontSize: 9,
     fontWeight: 600,
-    color: BRAND.teal,
+    color: BRAND.green,
   },
   summaryRow: {
     flexDirection: 'row',
-    backgroundColor: BRAND.tealSoft,
+    backgroundColor: '#E8F0FE',
     padding: 8,
     borderRadius: 4,
     marginTop: 2,
@@ -191,7 +200,7 @@ const s = StyleSheet.create({
     color: BRAND.ink,
   },
   paycheckCard: {
-    border: `0.5 solid ${BRAND.border}`,
+    border: `0.5 solid ${BRAND.cardBorder}`,
     borderRadius: 4,
     padding: 16,
     marginBottom: 12,
@@ -215,14 +224,14 @@ const s = StyleSheet.create({
   },
   paycheckEyebrow: {
     fontSize: 8,
-    fontWeight: 500,
+    fontWeight: 600,
     textTransform: 'uppercase',
     letterSpacing: 0.5,
     marginBottom: 4,
   },
   paycheckValue: {
     fontSize: 18,
-    fontWeight: 500,
+    fontWeight: 600,
     marginBottom: 2,
   },
   paycheckCaption: {
@@ -230,25 +239,25 @@ const s = StyleSheet.create({
     color: BRAND.muted,
   },
   paycheckStrip: {
-    backgroundColor: BRAND.tealSoft,
+    backgroundColor: '#E8F0FE',
     padding: 8,
     borderRadius: 4,
     alignItems: 'center',
   },
   paycheckStripText: {
     fontSize: 11,
-    fontWeight: 500,
-    color: BRAND.teal,
+    fontWeight: 600,
+    color: BRAND.blue,
   },
   disclaimerSection: {
     marginTop: 20,
     paddingTop: 12,
-    borderTop: `0.5 solid ${BRAND.border}`,
+    borderTop: `0.5 solid ${BRAND.cardBorder}`,
   },
   disclaimerTitle: {
     fontSize: 13,
-    fontWeight: 500,
-    color: BRAND.teal,
+    fontWeight: 600,
+    color: BRAND.ink,
     marginBottom: 6,
   },
   disclaimerText: {
@@ -262,21 +271,20 @@ const s = StyleSheet.create({
     bottom: 24,
     left: 48,
     right: 48,
-    borderTop: `0.5 solid ${BRAND.border}`,
+    borderTop: `0.5 solid ${BRAND.cardBorder}`,
     paddingTop: 6,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   footerText: {
-    fontSize: 8,
-    color: BRAND.muted,
+    fontSize: 7,
+    color: BRAND.textMuted,
   },
   footerBrand: {
-    fontSize: 8,
-    color: BRAND.teal,
-    fontWeight: 500,
-    letterSpacing: 1,
+    fontSize: 7,
+    color: BRAND.blue,
+    fontWeight: 600,
   },
 });
 
@@ -301,6 +309,30 @@ function TableHeaderRow() {
       <Text style={[s.tableHeaderCell, { width: COL_W.currentNet, textAlign: 'right' }]}>Current Net (Annual)</Text>
       <Text style={[s.tableHeaderCell, { width: COL_W.projectedNet, textAlign: 'right' }]}>Projected Net (Annual)</Text>
       <Text style={[s.tableHeaderCell, { width: COL_W.savings, textAlign: 'right' }]}>Annual Savings</Text>
+    </View>
+  );
+}
+
+function PageHeader() {
+  return (
+    <>
+      <View style={s.gradientBar} />
+      <View style={s.headerArea}>
+        <Text style={s.headerBrandText}>
+          Health<Text style={s.headerBrandNormal}>Cues</Text>
+        </Text>
+        <Text style={s.headerEyebrow}>Informed Analysis</Text>
+      </View>
+    </>
+  );
+}
+
+function PageFooter({ date }: { date: string }) {
+  return (
+    <View style={s.footer} fixed>
+      <Text style={s.footerText}>Prepared by HealthCues · Section 125 Analysis</Text>
+      <Text style={s.footerBrand}>HealthCues</Text>
+      <Text style={s.footerText} render={({ pageNumber, totalPages }) => `${pageNumber} / ${totalPages}`} />
     </View>
   );
 }
@@ -365,13 +397,10 @@ export function InformedAnalysisPDF({ groupName, result, employeeResults, payrol
     <Document>
       {/* PAGE 1 — Header + KPIs + start of employee table */}
       <Page size="LETTER" style={s.page}>
-        <View style={s.headerBand}>
-          <Text style={s.headerBrandText}>SYNRGY</Text>
-          <Text style={s.headerEyebrow}>Informed Analysis</Text>
-        </View>
+        <PageHeader />
 
         <Text style={s.groupName}>{groupName || 'Company'}</Text>
-        <View style={s.orangeBar} />
+        <View style={s.blueRule} />
         <Text style={s.subtitle}>Section 125 Cafeteria Plan — Census-Based Tax Savings Analysis</Text>
         <Text style={s.censusBadge}>CENSUS-BASED</Text>
         <Text style={s.metaLine}>{date} · {result.totalEmployees} employees · Based on uploaded census data</Text>
@@ -407,6 +436,7 @@ export function InformedAnalysisPDF({ groupName, result, employeeResults, payrol
         <View style={s.divider} />
 
         <Text style={s.sectionTitle}>Employee-Level Breakdown</Text>
+        <View style={s.sectionTitleRule} />
         <Text style={s.sectionCaption}>Employee identifiers anonymized. Data based on uploaded census.</Text>
 
         <TableHeaderRow />
@@ -432,11 +462,7 @@ export function InformedAnalysisPDF({ groupName, result, employeeResults, payrol
           </View>
         )}
 
-        <View style={s.footer} fixed>
-          <Text style={s.footerText}>Section 125 Informed Analysis · Generated {date}</Text>
-          <Text style={s.footerBrand}>SYNRGY</Text>
-          <Text style={s.footerText} render={({ pageNumber, totalPages }) => `Page ${pageNumber} of ${totalPages}`} />
-        </View>
+        <PageFooter date={date} />
       </Page>
 
       {/* CONTINUATION PAGES — remaining employee rows */}
@@ -445,12 +471,10 @@ export function InformedAnalysisPDF({ groupName, result, employeeResults, payrol
         const baseIndex = ROWS_FIRST_PAGE + ci * ROWS_PER_CONTINUATION;
         return (
           <Page key={`table-cont-${ci}`} size="LETTER" style={s.page}>
-            <View style={s.headerBand}>
-              <Text style={s.headerBrandText}>SYNRGY</Text>
-              <Text style={s.headerEyebrow}>Informed Analysis</Text>
-            </View>
+            <PageHeader />
 
             <Text style={[s.sectionTitle, { marginTop: 20 }]}>Employee-Level Breakdown (continued)</Text>
+            <View style={s.sectionTitleRule} />
             <TableHeaderRow />
             {chunk.map((row, i) => {
               const globalIdx = baseIndex + i;
@@ -477,25 +501,19 @@ export function InformedAnalysisPDF({ groupName, result, employeeResults, payrol
               </View>
             )}
 
-            <View style={s.footer} fixed>
-              <Text style={s.footerText}>Section 125 Informed Analysis · Generated {date}</Text>
-              <Text style={s.footerBrand}>SYNRGY</Text>
-              <Text style={s.footerText} render={({ pageNumber, totalPages }) => `Page ${pageNumber} of ${totalPages}`} />
-            </View>
+            <PageFooter date={date} />
           </Page>
         );
       })}
 
       {/* PAYCHECK COMPARISON PAGE */}
       <Page size="LETTER" style={s.page}>
-        <View style={s.headerBand}>
-          <Text style={s.headerBrandText}>SYNRGY</Text>
-          <Text style={s.headerEyebrow}>Informed Analysis</Text>
-        </View>
+        <PageHeader />
 
         <Text style={[s.sectionTitle, { marginTop: 20 }]}>Paycheck Comparison — Sample Employees</Text>
+        <View style={s.sectionTitleRule} />
         <Text style={s.sectionCaption}>
-          Representative sample of {samples.length} employees across salary tiers showing before/after SYNRGY impact.
+          Representative sample of {samples.length} employees across salary tiers showing before/after impact.
         </Text>
 
         {samples.map((sample) => (
@@ -511,8 +529,8 @@ export function InformedAnalysisPDF({ groupName, result, employeeResults, payrol
                 <Text style={s.paycheckCaption}>per paycheck</Text>
               </View>
               <View style={s.paycheckCol}>
-                <Text style={[s.paycheckEyebrow, { color: BRAND.teal }]}>WITH SYNRGY</Text>
-                <Text style={[s.paycheckValue, { color: BRAND.teal, fontWeight: 600 }]}>{fmtCents(sample.perPaycheckAfter)}</Text>
+                <Text style={[s.paycheckEyebrow, { color: BRAND.blue }]}>WITH PLAN</Text>
+                <Text style={[s.paycheckValue, { color: BRAND.blue, fontWeight: 600 }]}>{fmtCents(sample.perPaycheckAfter)}</Text>
                 <Text style={s.paycheckCaption}>per paycheck</Text>
               </View>
             </View>
@@ -522,19 +540,12 @@ export function InformedAnalysisPDF({ groupName, result, employeeResults, payrol
           </View>
         ))}
 
-        <View style={s.footer} fixed>
-          <Text style={s.footerText}>Section 125 Informed Analysis · Generated {date}</Text>
-          <Text style={s.footerBrand}>SYNRGY</Text>
-          <Text style={s.footerText} render={({ pageNumber, totalPages }) => `Page ${pageNumber} of ${totalPages}`} />
-        </View>
+        <PageFooter date={date} />
       </Page>
 
       {/* DISCLOSURES PAGE */}
       <Page size="LETTER" style={s.page}>
-        <View style={s.headerBand}>
-          <Text style={s.headerBrandText}>SYNRGY</Text>
-          <Text style={s.headerEyebrow}>Informed Analysis</Text>
-        </View>
+        <PageHeader />
 
         <View style={[s.disclaimerSection, { marginTop: 20, borderTop: 'none', paddingTop: 0 }]}>
           <Text style={s.disclaimerTitle}>Important Disclosures</Text>
@@ -558,11 +569,7 @@ export function InformedAnalysisPDF({ groupName, result, employeeResults, payrol
           </Text>
         </View>
 
-        <View style={s.footer} fixed>
-          <Text style={s.footerText}>Section 125 Informed Analysis · Generated {date}</Text>
-          <Text style={s.footerBrand}>SYNRGY</Text>
-          <Text style={s.footerText} render={({ pageNumber, totalPages }) => `Page ${pageNumber} of ${totalPages}`} />
-        </View>
+        <PageFooter date={date} />
       </Page>
     </Document>
   );

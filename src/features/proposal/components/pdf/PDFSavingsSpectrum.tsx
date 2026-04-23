@@ -1,28 +1,29 @@
 import { View, Text, StyleSheet } from '@react-pdf/renderer';
 import type { SavingsRange } from '../../types/proposal.types';
 
-const TEAL = '#005F78';
-const TEAL_SOFT = '#E8F1F4';
-const ORANGE = '#C95A38';
-const INK = '#1A3A42';
-const MUTED = '#5A6E73';
-const BORDER = '#D9CFC0';
+const BLUE = '#3F7FF4';
+const BLUE_SOFT = '#E8F0FE';
+const GREEN = '#2FBF8F';
+const INK = '#0F172A';
+const MUTED = '#475569';
+const BORDER = '#E6EEF6';
 
 const s = StyleSheet.create({
   container: { marginVertical: 12 },
-  title: { fontSize: 14, fontWeight: 500, color: TEAL, marginBottom: 8 },
+  title: { fontSize: 14, fontWeight: 600, color: INK, marginBottom: 8 },
+  titleRule: { width: 40, height: 0.5, backgroundColor: BLUE, marginBottom: 8 },
   bar: { flexDirection: 'row', height: 20, borderRadius: 4, overflow: 'hidden' },
-  left: { backgroundColor: TEAL_SOFT },
-  center: { backgroundColor: TEAL },
+  left: { backgroundColor: BLUE_SOFT },
+  center: { backgroundColor: BLUE },
   right: { backgroundColor: BORDER },
   valuesRow: { flexDirection: 'row', justifyContent: 'space-between', marginTop: 8 },
   valueBox: { alignItems: 'center', flex: 1 },
-  valueText: { fontSize: 14, fontWeight: 500, color: TEAL },
-  valueTextProjected: { fontSize: 16, fontWeight: 600, color: TEAL },
+  valueText: { fontSize: 14, fontWeight: 500, color: BLUE },
+  valueTextProjected: { fontSize: 16, fontWeight: 600, color: BLUE },
   projectedUnderline: {
     width: 40,
     height: 2,
-    backgroundColor: ORANGE,
+    backgroundColor: GREEN,
     marginTop: 3,
   },
   valueLabel: { fontSize: 9, color: MUTED, marginTop: 2 },
@@ -45,6 +46,7 @@ export function PDFSavingsSpectrum({ range, proposalType }: PDFSavingsSpectrumPr
   return (
     <View style={s.container}>
       <Text style={s.title}>Your Savings Outlook</Text>
+      <View style={s.titleRule} />
       <View style={s.bar}>
         <View style={[s.left, { width: zones.left }]} />
         <View style={[s.center, { width: zones.center }]} />
