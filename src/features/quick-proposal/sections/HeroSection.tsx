@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Users, FileText, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { GlassCard } from '@/features/proposal/components/shared/GlassCard';
+import { IconRing } from '@/components/branding/IconRing';
 
 export function HeroSection() {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ export function HeroSection() {
           Section 125 Proposal Tool
         </p>
 
-        <h1 className="mt-3 text-[44px] font-bold leading-tight text-text-primary">
+        <h1 className="mt-3 text-[44px] font-bold leading-tight text-brand-gradient">
           Quick Estimate
         </h1>
 
@@ -30,9 +31,7 @@ export function HeroSection() {
         <div className="mt-6 grid grid-cols-2 gap-3">
           <GlassCard variant="secondary" className="text-left !rounded-[16px]">
             <div className="flex items-start gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-full" style={{ background: '#E8F0FE' }}>
-                <Users className="h-4 w-4 text-accent" />
-              </div>
+              <IconRing Icon={Users} size={36} />
               <div>
                 <p className="text-[15px] font-semibold text-text-primary">For Employees</p>
                 <p className="mt-0.5 text-[14px] text-text-secondary">Lower federal, state, and FICA tax obligations</p>
@@ -41,9 +40,7 @@ export function HeroSection() {
           </GlassCard>
           <GlassCard variant="secondary" className="text-left !rounded-[16px]">
             <div className="flex items-start gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-full" style={{ background: '#E8F0FE' }}>
-                <FileText className="h-4 w-4 text-accent" />
-              </div>
+              <IconRing Icon={FileText} size={36} />
               <div>
                 <p className="text-[15px] font-semibold text-text-primary">For Employers</p>
                 <p className="mt-0.5 text-[14px] text-text-secondary">7.65% FICA savings on all pre-tax deductions</p>

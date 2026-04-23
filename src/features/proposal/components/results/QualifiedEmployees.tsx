@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { CheckCircle, TrendingUp } from 'lucide-react';
 import { PROPOSAL_LABELS } from '@/config/language';
+import { IconRing } from '@/components/branding/IconRing';
 
 interface QualifiedEmployeesProps {
   qualified: number;
@@ -24,9 +25,7 @@ export function QualifiedEmployees({
         animate={{ opacity: 1, x: 0 }}
         className="glass-secondary flex items-start gap-3"
       >
-        <div className="flex h-10 w-10 items-center justify-center rounded-full" style={{ background: '#E8F0FE' }}>
-          <CheckCircle className="h-5 w-5 text-success" />
-        </div>
+        <IconRing Icon={CheckCircle} size={40} />
         <div>
           <p className="metric-label">{PROPOSAL_LABELS.QUALIFIED}</p>
           <p className="mt-1 text-[20px] font-semibold text-text-primary">
@@ -43,9 +42,7 @@ export function QualifiedEmployees({
         animate={{ opacity: 1, x: 0 }}
         className="glass-secondary flex items-start gap-3"
       >
-        <div className="flex h-10 w-10 items-center justify-center rounded-full" style={{ background: '#E8F0FE' }}>
-          <TrendingUp className="h-5 w-5 text-success" />
-        </div>
+        <IconRing Icon={TrendingUp} size={40} />
         <div>
           <p className="metric-label">{PROPOSAL_LABELS.POSITIVE_IMPACT}</p>
           <p className="mt-1 text-[20px] font-semibold text-success">

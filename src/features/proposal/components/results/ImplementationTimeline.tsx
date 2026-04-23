@@ -1,4 +1,5 @@
 import { Settings, Users, TrendingUp } from 'lucide-react';
+import { IconRing } from '@/components/branding/IconRing';
 
 const STEPS = [
   {
@@ -42,14 +43,8 @@ export function ImplementationTimeline() {
 
         {STEPS.map((step, i) => (
           <div key={step.title} className="relative flex-1 text-center" style={{ padding: '0 16px' }}>
-            <div
-              className="relative z-10 mx-auto flex h-12 w-12 items-center justify-center rounded-full"
-              style={{
-                background: '#E8F0FE',
-                border: '1px solid rgba(63, 127, 244, 0.2)',
-              }}
-            >
-              <step.icon size={24} className="text-accent" />
+            <div className="relative z-10 mx-auto">
+              <IconRing Icon={step.icon} size={48} />
             </div>
             <p className="mt-3 text-[15px] font-semibold text-text-primary">{step.title}</p>
             <p className="mt-1 text-[13px] font-medium text-accent">{step.timeline}</p>
