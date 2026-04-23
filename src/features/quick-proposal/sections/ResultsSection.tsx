@@ -326,7 +326,7 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
                           <PayRow label="Net Pay" value={activePaycheck.netBefore} bold />
                         </GlassCard>
 
-                        {/* With SYNRGY */}
+                        {/* With Plan */}
                         <GlassCard inner style={{ borderColor: `rgba(63,127,244,0.2)` }}>
                           <h4 style={{ fontWeight: 600, fontSize: 14, color: ACCENT, marginBottom: 16, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Paycheck with Plan</h4>
                           <PaySection title="Earnings">
@@ -350,7 +350,7 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
                               <span style={{
                                 fontWeight: 600,
                                 fontSize: 14,
-                                fontFamily: 'Inter',
+                                fontFamily: "'JetBrains Mono', monospace",
                                 color: activePaycheck.increase >= 0 ? ACCENT : '#EF4444',
                               }}>
                                 {activePaycheck.increase >= 0 ? '+' : ''}{formatDollarCents(activePaycheck.increase)}({activePaycheck.increase >= 0 ? '+' : ''}{activePaycheck.pctIncrease.toFixed(1)}%)
