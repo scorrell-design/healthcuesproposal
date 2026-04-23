@@ -119,8 +119,7 @@ describe('calculateEmployeeFICA', () => {
 describe('estimatePreTaxDeductions', () => {
   it('returns default deduction when no benefits configured', () => {
     const deduction = estimatePreTaxDeductions(60000, 'mid', {
-      healthParticipation: 0,
-      healthPremiumAnnual: 0,
+      healthBenefits: [],
       retirementParticipation: 0,
       retirementRate: 0,
       hsaParticipation: 0,
@@ -132,8 +131,7 @@ describe('estimatePreTaxDeductions', () => {
 
   it('includes health premium when participation > 0', () => {
     const deduction = estimatePreTaxDeductions(60000, 'mid', {
-      healthParticipation: 100,
-      healthPremiumAnnual: 6000,
+      healthBenefits: [{ participationRate: 100, premiumAnnual: 6000 }],
       retirementParticipation: 0,
       retirementRate: 0,
       hsaParticipation: 0,
@@ -145,8 +143,7 @@ describe('estimatePreTaxDeductions', () => {
 
   it('scales deduction by participation rate', () => {
     const full = estimatePreTaxDeductions(60000, 'mid', {
-      healthParticipation: 100,
-      healthPremiumAnnual: 6000,
+      healthBenefits: [{ participationRate: 100, premiumAnnual: 6000 }],
       retirementParticipation: 0,
       retirementRate: 0,
       hsaParticipation: 0,
@@ -154,8 +151,7 @@ describe('estimatePreTaxDeductions', () => {
     });
 
     const half = estimatePreTaxDeductions(60000, 'mid', {
-      healthParticipation: 50,
-      healthPremiumAnnual: 6000,
+      healthBenefits: [{ participationRate: 50, premiumAnnual: 6000 }],
       retirementParticipation: 0,
       retirementRate: 0,
       hsaParticipation: 0,
@@ -163,5 +159,22 @@ describe('estimatePreTaxDeductions', () => {
     });
 
     expect(half).toBe(full / 2);
+  });
+
+  it('sums per-benefit contributions independently', () => {
+    const deduction = estimatePreTaxDeductions(60000, 'mid', {
+      healthBenefits: [
+        { participationRate: 75, premiumAnnual: 5850 },
+        { participationRate: 75, premiumAnnual: 720 },
+        { participationRate: 75, premiumAnnual: 330 },
+      ],
+      retirementParticipation: 0,
+      retirementRate: 0,
+      hsaParticipation: 0,
+      hsaAnnual: 0,
+    });
+
+    const expected = 5850 * 0.75 + 720 * 0.75 + 330 * 0.75;
+    expect(deduction).toBeCloseTo(expected, 2);
   });
 });

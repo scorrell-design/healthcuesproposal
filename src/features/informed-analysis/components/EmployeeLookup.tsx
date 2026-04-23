@@ -42,7 +42,7 @@ export function EmployeeLookup({ employees, employeeResults, payPeriodsPerYear }
 
     const tierLevel = emp.salary < 35000 ? 'entry' : emp.salary < 65000 ? 'mid' : emp.salary < 100000 ? 'senior' : 'executive';
     const annualPreTax = empResult?.preTaxDeduction ?? estimatePreTaxDeductions(emp.salary, tierLevel, {
-      healthParticipation: 0, healthPremiumAnnual: 0,
+      healthBenefits: [],
       retirementParticipation: 0, retirementRate: 0,
       hsaParticipation: 0, hsaAnnual: 0,
     });

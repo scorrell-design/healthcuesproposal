@@ -30,10 +30,9 @@ export function StickyActionBar({
       <div
         className="fixed bottom-0 left-0 right-0 z-50"
         style={{
-          background: 'rgba(255, 255, 255, 0.95)',
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)',
+          background: '#FFFFFF',
           borderTop: '1px solid #E6EEF6',
+          boxShadow: '0 -1px 3px rgba(15,23,42,0.04), 0 -4px 12px rgba(15,23,42,0.04)',
         }}
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">

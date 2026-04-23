@@ -66,12 +66,16 @@ export function calculateEmployeeFICA(input: FICAInput): FICAOutput {
   };
 }
 
+export interface HealthBenefitInput {
+  participationRate: number;
+  premiumAnnual: number;
+}
+
 export function estimatePreTaxDeductions(
   salary: number,
   tierLevel: string,
   benefits: {
-    healthParticipation: number;
-    healthPremiumAnnual: number;
+    healthBenefits: HealthBenefitInput[];
     retirementParticipation: number;
     retirementRate: number;
     hsaParticipation: number;
@@ -80,8 +84,9 @@ export function estimatePreTaxDeductions(
 ): number {
   let total = 0;
 
-  const healthChance = benefits.healthParticipation / 100;
-  total += benefits.healthPremiumAnnual * healthChance;
+  for (const hb of benefits.healthBenefits) {
+    total += hb.premiumAnnual * (hb.participationRate / 100);
+  }
 
   const retirementChance = benefits.retirementParticipation / 100;
   total += salary * (benefits.retirementRate / 100) * retirementChance;

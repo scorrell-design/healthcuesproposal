@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Loader2, ShieldCheck, Download, ChevronDown, ChevronUp, CheckCircle2, Plus, Minus,
+  Loader2, Download, ChevronDown, CheckCircle2, Plus, Minus,
 } from 'lucide-react';
 import { useProposalStore } from '@/features/proposal/store/proposal.store';
 import { usePDFGeneration } from '@/features/proposal/hooks/usePDFGeneration';
@@ -12,13 +12,25 @@ import { FICA_RATES, ADMIN_FEE_ANNUAL } from '@/config/fica-rates';
 import {
   DISCLAIMER_TEXT, KEY_BENEFITS, VALUE_PROPOSITIONS, FAQ_ITEMS, HOW_WE_CALCULATE,
 } from '@/constants/proposalCopy';
+import { HealthCuesWordmark } from '@/components/branding/HealthCuesWordmark';
+import { HealthCuesMark } from '@/components/branding/HealthCuesMark';
 import type { TierResult } from '@/features/proposal/types/proposal.types';
 
-const ACCENT = '#3F7FF4';
-const BG = '#0F172A';
-const CARD_BG = 'rgba(255,255,255,0.04)';
-const CARD_BORDER = '1px solid rgba(255,255,255,0.08)';
-const MUTED = 'rgba(255,255,255,0.5)';
+const BRAND_BLUE = '#3F7FF4';
+const BRAND_BLUE_DEEP = '#2E65D4';
+const BRAND_GREEN = '#2FBF8F';
+const GRADIENT = 'linear-gradient(135deg, #2FBF8F 0%, #3F7FF4 100%)';
+const PAGE_BG = '#FFFFFF';
+const CARD_BG = '#FFFFFF';
+const CARD_BORDER = '#E6EEF6';
+const CARD_SHADOW = '0 4px 20px rgba(15,23,42,0.06)';
+const CARD_SHADOW_SM = '0 1px 4px rgba(15,23,42,0.04)';
+const INNER_BG = '#F6F9FC';
+const TEXT_PRIMARY = '#0F172A';
+const TEXT_SECONDARY = '#475569';
+const TEXT_MUTED = '#94A3B8';
+const FONT_SANS = "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+const FONT_MONO = "'JetBrains Mono', 'SF Mono', Monaco, monospace";
 
 interface ResultsSectionProps {
   groupId: string;
@@ -146,16 +158,16 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
   if (isCalculating) {
     return (
       <div className="flex items-center justify-center py-16">
-        <Loader2 className="h-5 w-5 animate-spin" style={{ color: ACCENT }} />
-        <span className="ml-2 text-[14px]" style={{ color: MUTED }}>Calculating savings...</span>
+        <Loader2 className="h-5 w-5 animate-spin" style={{ color: BRAND_BLUE }} />
+        <span className="ml-2 text-[14px]" style={{ color: TEXT_MUTED, fontFamily: FONT_SANS }}>Calculating savings...</span>
       </div>
     );
   }
 
   if (!result) {
     return (
-      <div id="results" className="p-12 text-center" style={{ background: CARD_BG, border: CARD_BORDER, borderRadius: 16 }}>
-        <p className="text-[14px]" style={{ color: MUTED }}>
+      <div id="results" style={{ background: CARD_BG, border: `1px solid ${CARD_BORDER}`, borderRadius: 16, padding: 48, textAlign: 'center', boxShadow: CARD_SHADOW }}>
+        <p style={{ fontSize: 14, color: TEXT_MUTED, fontFamily: FONT_SANS, margin: 0 }}>
           Complete the sections above to see your savings projection.
         </p>
       </div>
@@ -169,62 +181,65 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
   const activePaycheck = activePaycheckTab === 'benefit' ? benefittingEmployee : nonBenefittingEmployee;
 
   return (
-    <div id="results" style={{ fontFamily: "'Poppins', system-ui, sans-serif", background: BG, borderRadius: 20, overflow: 'hidden' }}>
+    <div id="results" style={{ fontFamily: FONT_SANS, background: PAGE_BG, borderRadius: 20, overflow: 'hidden' }}>
       {/* B1 — Sticky Header */}
-      <div
-        style={{
-          position: 'sticky',
-          top: 0,
-          zIndex: 50,
-          height: 72,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '0 32px',
-          background: 'rgba(11,18,32,0.85)',
-          backdropFilter: 'blur(12px)',
-          borderBottom: '1px solid rgba(255,255,255,0.06)',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <ShieldCheck size={22} style={{ color: ACCENT }} />
-          <span style={{ fontWeight: 600, fontSize: 18, color: '#fff' }}>HealthCues Plan</span>
-        </div>
-        <button
+      <div style={{ position: 'sticky', top: 0, zIndex: 50 }}>
+        <div
           style={{
-            background: ACCENT,
-            color: BG,
-            borderRadius: 8,
-            padding: '10px 22px',
-            fontWeight: 600,
-            fontSize: 14,
-            border: 'none',
-            cursor: 'pointer',
+            height: 64,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '0 32px',
+            background: PAGE_BG,
+            borderBottom: `1px solid ${CARD_BORDER}`,
           }}
         >
-          Contact Us
-        </button>
+          <HealthCuesWordmark size={28} />
+          <button
+            style={{
+              background: BRAND_BLUE,
+              color: '#FFFFFF',
+              borderRadius: 9999,
+              padding: '10px 22px',
+              fontWeight: 600,
+              fontSize: 14,
+              border: 'none',
+              cursor: 'pointer',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+              fontFamily: FONT_SANS,
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = BRAND_BLUE_DEEP; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = BRAND_BLUE; }}
+          >
+            CONTACT US
+          </button>
+        </div>
+        <div style={{ height: 3, background: GRADIENT }} />
       </div>
 
       <div style={{ padding: '0 40px 60px' }}>
         {/* B2 — Hero */}
         <div style={{ textAlign: 'center', paddingTop: 48 }}>
-          <div style={{ maxHeight: 96, marginBottom: 24 }}>
-            <ShieldCheck size={64} style={{ color: ACCENT, margin: '0 auto' }} />
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 24 }}>
+            <HealthCuesMark size={64} />
           </div>
-          <h1 style={{ fontWeight: 700, fontSize: 36, color: '#fff', margin: 0 }}>
-            Your Customized Proposal
+          <h1 style={{ fontWeight: 600, fontSize: 36, color: TEXT_PRIMARY, margin: 0 }}>
+            Your Customized HealthCues Proposal
           </h1>
-          <div style={{ width: 80, height: 2, background: ACCENT, margin: '12px auto 16px' }} />
+          <div style={{ width: 80, height: 2, background: GRADIENT, margin: '12px auto 16px' }} />
           <span
             style={{
               display: 'inline-block',
-              background: ACCENT,
-              color: BG,
+              background: GRADIENT,
+              color: '#FFFFFF',
               fontWeight: 600,
               fontSize: 12,
               padding: '4px 14px',
               borderRadius: 9999,
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
             }}
           >
             AI-Generated
@@ -240,19 +255,20 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
 
         {/* B4 — Key Benefits */}
         <div style={{ marginTop: 56, textAlign: 'center' }}>
-          <h2 style={{ fontWeight: 700, fontSize: 20, color: '#fff', marginBottom: 20 }}>Key Benefits</h2>
+          <h2 style={{ fontWeight: 600, fontSize: 20, color: TEXT_PRIMARY, marginBottom: 20 }}>Key Benefits</h2>
           <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 10 }}>
             {KEY_BENEFITS.map((b) => (
               <span
                 key={b}
                 style={{
                   background: CARD_BG,
-                  border: `1px solid rgba(63,127,244,0.2)`,
+                  border: `1px solid ${CARD_BORDER}`,
                   padding: '10px 20px',
                   borderRadius: 9999,
                   fontWeight: 500,
                   fontSize: 14,
-                  color: '#fff',
+                  color: TEXT_PRIMARY,
+                  boxShadow: CARD_SHADOW_SM,
                 }}
               >
                 {b}
@@ -262,18 +278,18 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
         </div>
 
         {/* B5 — How We Calculate */}
-        <GlassCard style={{ marginTop: 56, textAlign: 'center' }}>
-          <h2 style={{ fontWeight: 700, fontSize: 22, color: '#fff', marginBottom: 16 }}>How We Calculate</h2>
-          <p style={{ fontWeight: 400, fontSize: 15, color: MUTED, maxWidth: 820, margin: '0 auto', lineHeight: 1.65 }}>
+        <Card style={{ marginTop: 56, textAlign: 'center' }}>
+          <h2 style={{ fontWeight: 600, fontSize: 22, color: TEXT_PRIMARY, marginBottom: 16 }}>How We Calculate</h2>
+          <p style={{ fontWeight: 400, fontSize: 15, color: TEXT_SECONDARY, maxWidth: 820, margin: '0 auto', lineHeight: 1.65 }}>
             {HOW_WE_CALCULATE}
           </p>
-        </GlassCard>
+        </Card>
 
         {/* B6 — Paycheck Comparison */}
-        <GlassCard style={{ marginTop: 40 }}>
+        <Card style={{ marginTop: 40 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' }} onClick={() => setPaycheckOpen(!paycheckOpen)}>
-            <h2 style={{ fontWeight: 700, fontSize: 22, color: '#fff', margin: 0 }}>Paycheck Comparison</h2>
-            {paycheckOpen ? <Minus size={20} style={{ color: MUTED }} /> : <Plus size={20} style={{ color: MUTED }} />}
+            <h2 style={{ fontWeight: 600, fontSize: 22, color: TEXT_PRIMARY, margin: 0 }}>Paycheck Comparison</h2>
+            {paycheckOpen ? <Minus size={20} style={{ color: TEXT_MUTED }} /> : <Plus size={20} style={{ color: TEXT_MUTED }} />}
           </div>
 
           <AnimatePresence>
@@ -296,8 +312,8 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
                     <>
                       {/* Employee Profile */}
                       <div style={{ textAlign: 'center', marginBottom: 24 }}>
-                        <h3 style={{ fontWeight: 600, fontSize: 16, color: '#fff', margin: 0 }}>Employee Profile</h3>
-                        <div style={{ width: 60, height: 2, background: ACCENT, margin: '8px auto 16px' }} />
+                        <h3 style={{ fontWeight: 600, fontSize: 16, color: TEXT_PRIMARY, margin: 0 }}>Employee Profile</h3>
+                        <div style={{ width: 60, height: 2, background: BRAND_BLUE, margin: '8px auto 16px' }} />
                         <div style={{ display: 'flex', justifyContent: 'center', gap: 40 }}>
                           <ProfileStat label="Annual Salary" value={formatDollar(activePaycheck.tierResult.avgSalary)} />
                           <ProfileStat label="Filing Status" value={activePaycheck.filingStatus} />
@@ -309,8 +325,8 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
                       {/* Two-column paycheck */}
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
                         {/* Current */}
-                        <GlassCard inner>
-                          <h4 style={{ fontWeight: 600, fontSize: 14, color: MUTED, marginBottom: 16, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Current Paycheck (Bi-weekly)</h4>
+                        <Card inner>
+                          <h4 style={{ fontWeight: 600, fontSize: 14, color: TEXT_MUTED, marginBottom: 16, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Current Paycheck (Bi-weekly)</h4>
                           <PaySection title="Earnings">
                             <PayRow label="Gross Pay" value={activePaycheck.grossPay} />
                           </PaySection>
@@ -322,13 +338,13 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
                             <PayRow label="State Withholding" value={-activePaycheck.stateBefore} negative />
                             <PayRow label="FICA (7.65%)" value={-activePaycheck.ficaBefore} negative />
                           </PaySection>
-                          <div style={{ height: 1, background: 'rgba(255,255,255,0.1)', margin: '12px 0' }} />
+                          <div style={{ height: 1, background: CARD_BORDER, margin: '12px 0' }} />
                           <PayRow label="Net Pay" value={activePaycheck.netBefore} bold />
-                        </GlassCard>
+                        </Card>
 
                         {/* With Plan */}
-                        <GlassCard inner style={{ borderColor: `rgba(63,127,244,0.2)` }}>
-                          <h4 style={{ fontWeight: 600, fontSize: 14, color: ACCENT, marginBottom: 16, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Paycheck with Plan</h4>
+                        <Card inner style={{ borderColor: 'rgba(63,127,244,0.25)' }}>
+                          <h4 style={{ fontWeight: 600, fontSize: 14, color: BRAND_BLUE, marginBottom: 16, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Paycheck with Plan</h4>
                           <PaySection title="Earnings">
                             <PayRow label="Gross Pay" value={activePaycheck.grossPay} />
                           </PaySection>
@@ -343,27 +359,27 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
                           <PaySection title="Plan Benefit">
                             <PayRow label="Tax Savings Benefit" value={activePaycheck.planBenefit} accent />
                           </PaySection>
-                          <div style={{ height: 1, background: 'rgba(255,255,255,0.1)', margin: '12px 0' }} />
+                          <div style={{ height: 1, background: CARD_BORDER, margin: '12px 0' }} />
                           <div>
                             <PayRow label="Net Pay" value={activePaycheck.netAfter} bold green={activePaycheck.increase > 0} />
                             <div style={{ textAlign: 'right', marginTop: 4 }}>
                               <span style={{
                                 fontWeight: 600,
                                 fontSize: 14,
-                                fontFamily: "'JetBrains Mono', monospace",
-                                color: activePaycheck.increase >= 0 ? ACCENT : '#EF4444',
+                                fontFamily: FONT_MONO,
+                                color: activePaycheck.increase >= 0 ? BRAND_GREEN : '#EF4444',
                               }}>
                                 {activePaycheck.increase >= 0 ? '+' : ''}{formatDollarCents(activePaycheck.increase)}({activePaycheck.increase >= 0 ? '+' : ''}{activePaycheck.pctIncrease.toFixed(1)}%)
                               </span>
                             </div>
                           </div>
-                        </GlassCard>
+                        </Card>
                       </div>
 
                       {/* Annual Impact Summary */}
                       <div style={{ textAlign: 'center', marginTop: 24 }}>
-                        <h3 style={{ fontWeight: 600, fontSize: 16, color: '#fff', margin: 0 }}>Annual Impact Summary</h3>
-                        <div style={{ width: 60, height: 2, background: ACCENT, margin: '8px auto 16px' }} />
+                        <h3 style={{ fontWeight: 600, fontSize: 16, color: TEXT_PRIMARY, margin: 0 }}>Annual Impact Summary</h3>
+                        <div style={{ width: 60, height: 2, background: BRAND_BLUE, margin: '8px auto 16px' }} />
                         <div style={{ display: 'flex', justifyContent: 'center', gap: 60 }}>
                           <ProfileStat label="Annual Take-Home Increase" value={formatDollarCents(activePaycheck.annualIncrease)} />
                           <ProfileStat label="Total Tax Savings" value={formatDollarCents(activePaycheck.annualTaxSavings)} />
@@ -372,7 +388,7 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
                       </div>
                     </>
                   ) : (
-                    <p style={{ color: MUTED, fontSize: 14, fontStyle: 'italic', textAlign: 'center', padding: '24px 0' }}>
+                    <p style={{ color: TEXT_MUTED, fontSize: 14, fontStyle: 'italic', textAlign: 'center', padding: '24px 0' }}>
                       No employees are projected to see a net decrease under this plan configuration.
                     </p>
                   )}
@@ -380,13 +396,13 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
               </motion.div>
             )}
           </AnimatePresence>
-        </GlassCard>
+        </Card>
 
         {/* B7 — Detailed Analysis */}
-        <GlassCard style={{ marginTop: 40 }}>
+        <Card style={{ marginTop: 40 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' }} onClick={() => setDetailedOpen(!detailedOpen)}>
-            <h2 style={{ fontWeight: 700, fontSize: 22, color: '#fff', margin: 0 }}>Detailed Analysis</h2>
-            {detailedOpen ? <Minus size={20} style={{ color: MUTED }} /> : <Plus size={20} style={{ color: MUTED }} />}
+            <h2 style={{ fontWeight: 600, fontSize: 22, color: TEXT_PRIMARY, margin: 0 }}>Detailed Analysis</h2>
+            {detailedOpen ? <Minus size={20} style={{ color: TEXT_MUTED }} /> : <Plus size={20} style={{ color: TEXT_MUTED }} />}
           </div>
 
           <AnimatePresence>
@@ -400,26 +416,26 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
               >
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, marginTop: 20 }}>
                   {/* Employee Eligibility */}
-                  <GlassCard inner>
+                  <Card inner>
                     <div style={{ textAlign: 'center' }}>
-                      <h3 style={{ fontWeight: 600, fontSize: 18, color: '#fff', margin: 0 }}>Employee Eligibility</h3>
-                      <div style={{ width: 60, height: 2, background: ACCENT, margin: '8px auto 20px' }} />
+                      <h3 style={{ fontWeight: 600, fontSize: 18, color: TEXT_PRIMARY, margin: 0 }}>Employee Eligibility</h3>
+                      <div style={{ width: 60, height: 2, background: GRADIENT, margin: '8px auto 20px' }} />
                     </div>
                     <DetailRow label="Total Eligible Employees" value={String(result.totalEmployees)} />
                     <DetailRow label="Eligible Employees" value={String(result.qualifiedEmployees)} />
                     <DetailRow label="Employees with positive net take-home pay" value={String(result.positivelyImpactedCount)} />
                     <DetailRow label="Participation rate of eligible employees" value={`${participationRate}%`} />
-                  </GlassCard>
+                  </Card>
 
                   {/* Financial Impact */}
-                  <GlassCard inner>
+                  <Card inner>
                     <div style={{ textAlign: 'center' }}>
-                      <h3 style={{ fontWeight: 600, fontSize: 18, color: '#fff', margin: 0 }}>Financial Impact</h3>
-                      <div style={{ width: 60, height: 2, background: ACCENT, margin: '8px auto 20px' }} />
+                      <h3 style={{ fontWeight: 600, fontSize: 18, color: TEXT_PRIMARY, margin: 0 }}>Financial Impact</h3>
+                      <div style={{ width: 60, height: 2, background: GRADIENT, margin: '8px auto 20px' }} />
                     </div>
                     <DetailRow label="Employer Annual Savings (Net of Fees):" value={formatDollar(netSavings)} />
                     <DetailRow label="Monthly Per Employee:" value={formatDollar(result.totalEmployees > 0 ? Math.round(netSavings / result.totalEmployees / 12) : 0)} />
-                  </GlassCard>
+                  </Card>
                 </div>
 
                 {/* Statistically Significant notice */}
@@ -431,24 +447,24 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
                     marginTop: 20,
                     padding: '14px 20px',
                     background: CARD_BG,
-                    border: CARD_BORDER,
+                    border: `1px solid ${CARD_BORDER}`,
                     borderRadius: 12,
-                    backdropFilter: 'blur(12px)',
+                    boxShadow: CARD_SHADOW_SM,
                   }}
                 >
-                  <CheckCircle2 size={20} style={{ color: ACCENT, flexShrink: 0 }} />
-                  <p style={{ color: '#fff', fontSize: 14, margin: 0 }}>
+                  <CheckCircle2 size={20} style={{ color: BRAND_GREEN, flexShrink: 0 }} />
+                  <p style={{ color: TEXT_PRIMARY, fontSize: 14, margin: 0 }}>
                     <strong>Statistically Significant:</strong> This analysis is based on a sample size of {result.totalEmployees} employees, which provides a statistically significant result.
                   </p>
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
-        </GlassCard>
+        </Card>
 
         {/* B8 — Value Proposition */}
         <div style={{ marginTop: 56, textAlign: 'center' }}>
-          <h2 style={{ fontWeight: 700, fontSize: 24, color: '#fff', marginBottom: 28 }}>Value Proposition</h2>
+          <h2 style={{ fontWeight: 600, fontSize: 24, color: TEXT_PRIMARY, marginBottom: 28 }}>Value Proposition</h2>
           <div
             style={{
               display: 'grid',
@@ -458,100 +474,103 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
             className="value-prop-grid"
           >
             {VALUE_PROPOSITIONS.map((vp, i) => (
-              <GlassCard key={i} inner style={{ textAlign: 'left' }}>
+              <Card key={i} inner style={{ textAlign: 'left' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
                   <div
                     style={{
                       width: 40,
                       height: 40,
                       borderRadius: '50%',
-                      background: ACCENT,
+                      background: GRADIENT,
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       fontWeight: 700,
                       fontSize: 16,
-                      color: BG,
+                      color: '#FFFFFF',
                       flexShrink: 0,
                     }}
                   >
                     {i + 1}
                   </div>
-                  <span style={{ fontWeight: 700, fontSize: 16, color: '#fff' }}>{vp.title}</span>
+                  <span style={{ fontWeight: 600, fontSize: 16, color: TEXT_PRIMARY }}>{vp.title}</span>
                 </div>
-                <p style={{ fontWeight: 400, fontSize: 14, color: MUTED, lineHeight: 1.5, margin: 0 }}>{vp.body}</p>
-              </GlassCard>
+                <p style={{ fontWeight: 400, fontSize: 14, color: TEXT_SECONDARY, lineHeight: 1.5, margin: 0 }}>{vp.body}</p>
+              </Card>
             ))}
           </div>
         </div>
 
         {/* B9 — FAQ */}
         <div style={{ marginTop: 56 }}>
-          <h2 style={{ fontWeight: 700, fontSize: 22, color: '#fff', marginBottom: 20, textAlign: 'center' }}>Frequently Asked Questions</h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            {FAQ_ITEMS.map((item, i) => (
-              <div key={i}>
-                <button
-                  onClick={() => setFaqOpen(faqOpen === i ? null : i)}
-                  style={{
-                    display: 'flex',
-                    width: '100%',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: '14px 4px',
-                    background: 'transparent',
-                    border: 'none',
-                    cursor: 'pointer',
-                    textAlign: 'left',
-                  }}
-                >
-                  <span style={{ fontWeight: 600, fontSize: 16, color: ACCENT }}>{item.q}</span>
-                  <ChevronDown
-                    size={18}
+          <h2 style={{ fontWeight: 600, fontSize: 22, color: TEXT_PRIMARY, marginBottom: 20, textAlign: 'center' }}>Frequently Asked Questions</h2>
+          <Card>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+              {FAQ_ITEMS.map((item, i) => (
+                <div key={i}>
+                  <button
+                    onClick={() => setFaqOpen(faqOpen === i ? null : i)}
                     style={{
-                      color: MUTED,
-                      flexShrink: 0,
-                      transform: faqOpen === i ? 'rotate(180deg)' : 'rotate(0deg)',
-                      transition: 'transform 0.2s',
+                      display: 'flex',
+                      width: '100%',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '14px 4px',
+                      background: 'transparent',
+                      border: 'none',
+                      cursor: 'pointer',
+                      textAlign: 'left',
+                      fontFamily: FONT_SANS,
                     }}
-                  />
-                </button>
-                <AnimatePresence>
-                  {faqOpen === i && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                      style={{ overflow: 'hidden' }}
-                    >
-                      <p style={{ padding: '0 4px 14px', fontSize: 15, color: MUTED, lineHeight: 1.6, margin: 0 }}>{item.a}</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-                {i < FAQ_ITEMS.length - 1 && <div style={{ height: 1, background: 'rgba(255,255,255,0.06)' }} />}
-              </div>
-            ))}
-          </div>
+                  >
+                    <span style={{ fontWeight: 600, fontSize: 16, color: BRAND_BLUE }}>{item.q}</span>
+                    <ChevronDown
+                      size={18}
+                      style={{
+                        color: BRAND_BLUE,
+                        flexShrink: 0,
+                        transform: faqOpen === i ? 'rotate(180deg)' : 'rotate(0deg)',
+                        transition: 'transform 0.2s',
+                      }}
+                    />
+                  </button>
+                  <AnimatePresence>
+                    {faqOpen === i && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        style={{ overflow: 'hidden' }}
+                      >
+                        <p style={{ padding: '0 4px 14px', fontSize: 15, color: TEXT_SECONDARY, lineHeight: 1.6, margin: 0 }}>{item.a}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                  {i < FAQ_ITEMS.length - 1 && <div style={{ height: 1, background: CARD_BORDER }} />}
+                </div>
+              ))}
+            </div>
+          </Card>
         </div>
 
         {/* B10 — CTA */}
-        <GlassCard style={{ marginTop: 56, textAlign: 'center' }}>
-          <h2 style={{ fontWeight: 700, fontSize: 24, color: ACCENT, margin: 0 }}>
+        <Card style={{ marginTop: 56, textAlign: 'center' }}>
+          <h2 style={{ fontWeight: 600, fontSize: 24, color: BRAND_BLUE, margin: 0 }}>
             Ready to boost employee satisfaction and reduce tax liability?
           </h2>
-          <p style={{ fontWeight: 400, fontSize: 16, color: 'rgba(255,255,255,0.8)', marginTop: 12 }}>
+          <p style={{ fontWeight: 400, fontSize: 16, color: TEXT_SECONDARY, marginTop: 12 }}>
             Our dedicated team will guide you through every step of the implementation process.
           </p>
-        </GlassCard>
+        </Card>
 
         {/* B11 — Disclaimer */}
-        <GlassCard style={{ marginTop: 40, textAlign: 'center' }}>
-          <h3 style={{ fontWeight: 700, fontSize: 18, color: '#fff', marginBottom: 12 }}>Disclaimer</h3>
-          <p style={{ fontWeight: 400, fontSize: 13, color: MUTED, lineHeight: 1.6, margin: 0 }}>
+        <Card style={{ marginTop: 40, textAlign: 'center' }}>
+          <h3 style={{ fontWeight: 600, fontSize: 18, color: TEXT_PRIMARY, marginBottom: 12 }}>Disclaimer</h3>
+          <p style={{ fontWeight: 400, fontSize: 13, color: TEXT_MUTED, lineHeight: 1.6, margin: 0 }}>
             {DISCLAIMER_TEXT}
           </p>
-        </GlassCard>
+        </Card>
 
         {/* B12 — Download */}
         <div style={{ textAlign: 'center', marginTop: 40 }}>
@@ -562,19 +581,24 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
               display: 'inline-flex',
               alignItems: 'center',
               gap: 10,
-              background: ACCENT,
-              color: BG,
+              background: BRAND_BLUE,
+              color: '#FFFFFF',
               fontWeight: 600,
               fontSize: 16,
               padding: '14px 32px',
-              borderRadius: 10,
+              borderRadius: 9999,
               border: 'none',
               cursor: isGenerating ? 'not-allowed' : 'pointer',
               opacity: isGenerating ? 0.6 : 1,
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+              fontFamily: FONT_SANS,
             }}
+            onMouseEnter={(e) => { if (!isGenerating) e.currentTarget.style.background = BRAND_BLUE_DEEP; }}
+            onMouseLeave={(e) => { if (!isGenerating) e.currentTarget.style.background = BRAND_BLUE; }}
           >
             {isGenerating ? <Loader2 size={18} className="animate-spin" /> : <Download size={18} />}
-            Download Full Proposal
+            DOWNLOAD FULL PROPOSAL
           </button>
         </div>
       </div>
@@ -596,15 +620,15 @@ function r2(n: number) {
   return Math.round(n * 100) / 100;
 }
 
-function GlassCard({ children, style, inner }: { children: React.ReactNode; style?: React.CSSProperties; inner?: boolean }) {
+function Card({ children, style, inner }: { children: React.ReactNode; style?: React.CSSProperties; inner?: boolean }) {
   return (
     <div
       style={{
-        background: CARD_BG,
-        border: CARD_BORDER,
-        borderRadius: 16,
-        padding: inner ? 24 : 32,
-        backdropFilter: 'blur(12px)',
+        background: inner ? INNER_BG : CARD_BG,
+        border: `1px solid ${CARD_BORDER}`,
+        borderRadius: inner ? 12 : 16,
+        padding: inner ? 20 : 32,
+        boxShadow: inner ? CARD_SHADOW_SM : CARD_SHADOW,
         ...style,
       }}
     >
@@ -618,17 +642,17 @@ function KpiCard({ label, value, caption }: { label: string; value: string; capt
     <div
       style={{
         background: CARD_BG,
-        border: CARD_BORDER,
+        border: `1px solid ${CARD_BORDER}`,
         borderRadius: 16,
         padding: '32px 24px',
         textAlign: 'center',
-        borderLeft: `4px solid ${ACCENT}`,
-        backdropFilter: 'blur(12px)',
+        borderLeft: `4px solid ${BRAND_BLUE}`,
+        boxShadow: CARD_SHADOW,
       }}
     >
-      <p style={{ fontWeight: 600, fontSize: 16, color: '#fff', margin: 0 }}>{label}</p>
-      <p style={{ fontWeight: 700, fontSize: 56, color: '#fff', margin: '8px 0', lineHeight: 1 }}>{value}</p>
-      <p style={{ fontWeight: 400, fontSize: 13, color: MUTED, margin: 0 }}>{caption}</p>
+      <p style={{ fontWeight: 600, fontSize: 16, color: TEXT_PRIMARY, margin: 0 }}>{label}</p>
+      <p style={{ fontWeight: 600, fontSize: 56, color: TEXT_PRIMARY, margin: '8px 0', lineHeight: 1, fontFamily: FONT_MONO }}>{value}</p>
+      <p style={{ fontWeight: 400, fontSize: 13, color: TEXT_MUTED, margin: 0 }}>{caption}</p>
     </div>
   );
 }
@@ -638,15 +662,16 @@ function PillTab({ active, children, onClick }: { active: boolean; children: Rea
     <button
       onClick={onClick}
       style={{
-        background: active ? ACCENT : 'transparent',
-        color: active ? BG : MUTED,
-        border: active ? 'none' : '1px solid rgba(255,255,255,0.15)',
+        background: active ? BRAND_BLUE : 'transparent',
+        color: active ? '#FFFFFF' : TEXT_MUTED,
+        border: active ? 'none' : `1px solid ${CARD_BORDER}`,
         borderRadius: 9999,
         padding: '8px 20px',
         fontWeight: 600,
         fontSize: 14,
         cursor: 'pointer',
         transition: 'all 0.2s',
+        fontFamily: FONT_SANS,
       }}
     >
       {children}
@@ -657,8 +682,8 @@ function PillTab({ active, children, onClick }: { active: boolean; children: Rea
 function ProfileStat({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
   return (
     <div>
-      <p style={{ fontWeight: 700, fontSize: 18, color: accent ? ACCENT : '#fff', margin: 0 }}>{value}</p>
-      <p style={{ fontWeight: 400, fontSize: 12, color: MUTED, margin: '4px 0 0' }}>{label}</p>
+      <p style={{ fontWeight: 600, fontSize: 18, color: accent ? BRAND_BLUE : TEXT_PRIMARY, margin: 0, fontFamily: FONT_MONO }}>{value}</p>
+      <p style={{ fontWeight: 400, fontSize: 12, color: TEXT_MUTED, margin: '4px 0 0' }}>{label}</p>
     </div>
   );
 }
@@ -666,7 +691,7 @@ function ProfileStat({ label, value, accent }: { label: string; value: string; a
 function PaySection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div style={{ marginBottom: 8 }}>
-      <p style={{ fontWeight: 600, fontSize: 11, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em', margin: '8px 0 4px' }}>{title}</p>
+      <p style={{ fontWeight: 600, fontSize: 11, color: TEXT_MUTED, textTransform: 'uppercase', letterSpacing: '0.05em', margin: '8px 0 4px' }}>{title}</p>
       {children}
     </div>
   );
@@ -677,12 +702,12 @@ function PayRow({ label, value, bold, negative, accent, green }: {
 }) {
   const isNeg = value < -0.005;
   const displayValue = isNeg ? `(${formatDollarCents(Math.abs(value))})` : formatDollarCents(value);
-  const color = accent ? ACCENT : green ? ACCENT : bold ? '#fff' : isNeg ? 'rgba(239,68,68,0.7)' : 'rgba(255,255,255,0.7)';
+  const color = accent ? BRAND_BLUE : green ? BRAND_GREEN : bold ? TEXT_PRIMARY : isNeg ? 'rgba(239,68,68,0.8)' : TEXT_SECONDARY;
 
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '3px 0', fontSize: bold ? 16 : 13 }}>
-      <span style={{ color: accent ? ACCENT : 'rgba(255,255,255,0.7)' }}>{label}</span>
-      <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: bold ? 700 : 500, color }}>{displayValue}</span>
+      <span style={{ color: accent ? BRAND_BLUE : TEXT_SECONDARY }}>{label}</span>
+      <span style={{ fontFamily: FONT_MONO, fontWeight: bold ? 600 : 500, color }}>{displayValue}</span>
     </div>
   );
 }
@@ -690,8 +715,8 @@ function PayRow({ label, value, bold, negative, accent, green }: {
 function DetailRow({ label, value }: { label: string; value: string }) {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 0' }}>
-      <span style={{ fontWeight: 400, fontSize: 14, color: MUTED }}>{label}</span>
-      <span style={{ fontWeight: 700, fontSize: 18, color: '#fff' }}>{value}</span>
+      <span style={{ fontWeight: 400, fontSize: 14, color: TEXT_SECONDARY }}>{label}</span>
+      <span style={{ fontWeight: 600, fontSize: 18, color: TEXT_PRIMARY, fontFamily: FONT_MONO }}>{value}</span>
     </div>
   );
 }

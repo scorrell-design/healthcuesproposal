@@ -35,14 +35,21 @@ export function useProposalCalculation() {
       const employeeCount = Math.round(company.employeeCount * (tier.workforcePercent / 100));
       const avgSalary = (tier.salaryMin + tier.salaryMax) / 2;
 
-      let healthPremiumAnnual = 0;
+      const healthBenefits: { participationRate: number; premiumAnnual: number }[] = [];
       let retirementRate = 0;
       let hsaAnnual = 0;
 
       if (benefits.enabled) {
         if (benefits.healthcare.enabled) {
-          const avgPremium = (benefits.healthcare.premiums.medical.individual + benefits.healthcare.premiums.medical.family) / 2;
-          healthPremiumAnnual = avgPremium * 12;
+          const hc = benefits.healthcare;
+          for (const key of ['medical', 'dental', 'vision'] as const) {
+            const sub = hc[key];
+            const avgPremium = (sub.premiums.individual + sub.premiums.family) / 2;
+            healthBenefits.push({
+              participationRate: sub.participationRate,
+              premiumAnnual: avgPremium * 12,
+            });
+          }
         }
         if (benefits.retirement.enabled) {
           retirementRate = benefits.retirement.contributionRates[tier.level] ?? 6;
@@ -53,8 +60,7 @@ export function useProposalCalculation() {
       }
 
       const preTaxDeduction = estimatePreTaxDeductions(avgSalary, tier.level, {
-        healthParticipation: benefits.enabled && benefits.healthcare.enabled ? benefits.healthcare.participationRate : 0,
-        healthPremiumAnnual,
+        healthBenefits,
         retirementParticipation: benefits.enabled && benefits.retirement.enabled ? benefits.retirement.participationRate : 0,
         retirementRate,
         hsaParticipation: benefits.enabled && benefits.hsa.enabled ? benefits.hsa.participationRate : 0,

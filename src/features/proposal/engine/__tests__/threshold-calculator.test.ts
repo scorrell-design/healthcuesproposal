@@ -14,10 +14,10 @@ describe('getMinimumDeductionForPositiveImpact', () => {
     expect(california).toBeLessThan(texas);
   });
 
-  it('returns higher minimum when SS exempt (smaller combined rate)', () => {
-    const withSS = getMinimumDeductionForPositiveImpact('TX', 'single', false);
-    const withoutSS = getMinimumDeductionForPositiveImpact('TX', 'single', true);
-    expect(withoutSS).toBeGreaterThan(withSS);
+  it('returns higher minimum for lower salary (smaller marginal rate)', () => {
+    const lowSalary = getMinimumDeductionForPositiveImpact('TX', 'single', 25000);
+    const highSalary = getMinimumDeductionForPositiveImpact('TX', 'single', 100000);
+    expect(lowSalary).toBeGreaterThan(highSalary);
   });
 });
 

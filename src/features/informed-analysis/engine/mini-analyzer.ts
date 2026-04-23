@@ -36,14 +36,21 @@ export function analyzeEmployees(
   const employeeResults: EmployeeResult[] = employees.map((emp) => {
     const tierLevel = getTierLevel(emp.salary);
 
-    let healthPremiumAnnual = 0;
+    const healthBenefits: { participationRate: number; premiumAnnual: number }[] = [];
     let retirementRate = 0;
     let hsaAnnual = 0;
 
     if (config.benefits.enabled) {
       if (config.benefits.healthcare.enabled) {
-        const premium = (config.benefits.healthcare.premiums.medical.individual + config.benefits.healthcare.premiums.medical.family) / 2;
-        healthPremiumAnnual = premium * 12;
+        const hc = config.benefits.healthcare;
+        for (const key of ['medical', 'dental', 'vision'] as const) {
+          const sub = hc[key];
+          const avgPremium = (sub.premiums.individual + sub.premiums.family) / 2;
+          healthBenefits.push({
+            participationRate: sub.participationRate,
+            premiumAnnual: avgPremium * 12,
+          });
+        }
       }
       if (config.benefits.retirement.enabled) {
         retirementRate = 6;
@@ -54,8 +61,7 @@ export function analyzeEmployees(
     }
 
     const preTaxDeduction = estimatePreTaxDeductions(emp.salary, tierLevel, {
-      healthParticipation: config.benefits.enabled && config.benefits.healthcare.enabled ? config.benefits.healthcare.participationRate : 0,
-      healthPremiumAnnual,
+      healthBenefits,
       retirementParticipation: config.benefits.enabled && config.benefits.retirement.enabled ? config.benefits.retirement.participationRate : 0,
       retirementRate,
       hsaParticipation: config.benefits.enabled && config.benefits.hsa.enabled ? config.benefits.hsa.participationRate : 0,

@@ -28,16 +28,18 @@ export interface SalaryTier {
   partTimeAvgHours?: number;
 }
 
+export interface HealthSubBenefit {
+  participationRate: number;
+  premiums: { individual: number; family: number };
+}
+
 export interface BenefitsConfig {
   enabled: boolean;
   healthcare: {
     enabled: boolean;
-    participationRate: number;
-    premiums: {
-      medical: { individual: number; family: number };
-      dental: { individual: number; family: number };
-      vision: { individual: number; family: number };
-    };
+    medical: HealthSubBenefit;
+    dental: HealthSubBenefit;
+    vision: HealthSubBenefit;
   };
   retirement: {
     enabled: boolean;

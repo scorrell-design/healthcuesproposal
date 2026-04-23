@@ -14,12 +14,9 @@ const DEFAULT_BENEFITS: BenefitsConfig = {
   enabled: false,
   healthcare: {
     enabled: true,
-    participationRate: 75,
-    premiums: {
-      medical: { individual: 200, family: 775 },
-      dental: { individual: 35, family: 85 },
-      vision: { individual: 15, family: 40 },
-    },
+    medical: { participationRate: 75, premiums: { individual: 200, family: 775 } },
+    dental:  { participationRate: 75, premiums: { individual: 35,  family: 85  } },
+    vision:  { participationRate: 75, premiums: { individual: 15,  family: 40  } },
   },
   retirement: {
     enabled: false,
@@ -50,6 +47,7 @@ export interface ProposalState {
   setIndustry: (preset: IndustryPreset) => void;
   setTierCount: (count: 2 | 3 | 4 | 5) => void;
   setTiers: (tiers: SalaryTier[]) => void;
+  updateTier: (index: number, updates: Partial<SalaryTier>) => void;
   setBenefits: (benefits: Partial<BenefitsConfig>) => void;
   setResult: (result: ProposalResult | null) => void;
   setIsCalculating: (val: boolean) => void;
@@ -85,6 +83,11 @@ export const useProposalStore = create<ProposalState>((set) => ({
   setTierCount: (tierCount) => set({ tierCount }),
 
   setTiers: (tiers) => set({ tiers }),
+
+  updateTier: (index, updates) =>
+    set((s) => ({
+      tiers: s.tiers.map((t, i) => (i === index ? { ...t, ...updates } : t)),
+    })),
 
   setBenefits: (updates) =>
     set((s) => ({ benefits: { ...s.benefits, ...updates } })),
