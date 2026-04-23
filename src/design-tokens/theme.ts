@@ -1,27 +1,38 @@
 export const tokens = {
   colors: {
-    base: '#0B1220',
-    accent: '#5ECEB0',
-    accentGlow: 'rgba(94, 206, 176, 0.15)',
-    accentMuted: 'rgba(94, 206, 176, 0.6)',
-    accentBorder: 'rgba(94, 206, 176, 0.5)',
-    secondary: '#A78BFA',
-    secondaryGlow: 'rgba(167, 139, 250, 0.15)',
-    textPrimary: '#F1F5F9',
-    textSecondary: 'rgba(241, 245, 249, 0.6)',
-    textTertiary: 'rgba(241, 245, 249, 0.35)',
-    surfaceGlass: 'rgba(255, 255, 255, 0.07)',
-    surfaceGlassLight: 'rgba(255, 255, 255, 0.05)',
-    borderGlass: 'rgba(255, 255, 255, 0.12)',
-    borderGlassLight: 'rgba(255, 255, 255, 0.08)',
-    success: '#34D399',
-    warning: '#FBBF24',
-    error: '#F87171',
+    brandGreen:     '#2FBF8F',
+    brandGreenDeep: '#22A578',
+    brandBlue:      '#3F7FF4',
+    brandBlueDeep:  '#2E65D4',
+
+    pageBg:      '#FFFFFF',
+    pageBgSoft:  '#F6F9FC',
+    cardBg:      '#FFFFFF',
+    cardBorder:  '#E6EEF6',
+
+    textPrimary:   '#0F172A',
+    textSecondary: '#475569',
+    textMuted:     '#94A3B8',
+
+    success: '#2FBF8F',
+    warning: '#D97706',
+    error:   '#DC2626',
+    info:    '#3F7FF4',
+
+    chart1: '#3F7FF4',
+    chart2: '#2FBF8F',
+    chart3: '#6BA8F5',
+    chart4: '#5FD4AA',
+    chart5: '#94A3B8',
+    chart6: '#D97706',
   },
+
   fonts: {
-    body: '"Inter", system-ui, -apple-system, sans-serif',
-    mono: '"DM Mono", ui-monospace, monospace',
+    sans:    "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    display: "'Poppins', -apple-system, BlinkMacSystemFont, sans-serif",
+    mono:    "'JetBrains Mono', 'SF Mono', Monaco, monospace",
   },
+
   radii: {
     input: '12px',
     card: '22px',
@@ -30,6 +41,7 @@ export const tokens = {
     button: '14px',
     segment: '10px',
   },
+
   spacing: {
     sectionPadding: '24px',
     inputGroupGap: '16px',
