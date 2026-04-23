@@ -247,8 +247,8 @@ export function ResultsSection({ groupId: _groupId }: ResultsSectionProps) {
         </div>
 
         {/* B3 — KPI Row */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, marginTop: 48 }}>
-          <KpiCard label="Anticipated Employee Participation Rate" value={`${participationRate}%`} caption="estimated voluntary participation among eligible employees based on internal modeling assumptions and historical participation patterns" />
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, marginTop: 48, alignItems: 'stretch' }}>
+          <KpiCard label="Anticipated Employee Participation Rate" value={`${participationRate}%`} caption="estimated voluntary participation among eligible employees" />
           <KpiCard label="Annual Company Savings" value={formatDollar(netSavings)} caption="estimated total employer payroll tax savings" />
           <KpiCard label="Per Employee Benefit" value={formatDollar(perEmployeeBenefit)} caption="average annual take-home pay increase per qualified employee" />
         </div>
@@ -644,15 +644,18 @@ function KpiCard({ label, value, caption }: { label: string; value: string; capt
         background: CARD_BG,
         border: `1px solid ${CARD_BORDER}`,
         borderRadius: 16,
-        padding: '32px 24px',
+        padding: '28px 24px',
         textAlign: 'center',
         borderLeft: `4px solid ${BRAND_BLUE}`,
         boxShadow: CARD_SHADOW,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
       }}
     >
-      <p style={{ fontWeight: 600, fontSize: 16, color: TEXT_PRIMARY, margin: 0 }}>{label}</p>
-      <p style={{ fontWeight: 600, fontSize: 56, color: TEXT_PRIMARY, margin: '8px 0', lineHeight: 1, fontFamily: FONT_MONO }}>{value}</p>
-      <p style={{ fontWeight: 400, fontSize: 13, color: TEXT_MUTED, margin: 0 }}>{caption}</p>
+      <p style={{ fontWeight: 600, fontSize: 15, color: TEXT_PRIMARY, margin: 0 }}>{label}</p>
+      <p style={{ fontWeight: 700, fontSize: 36, color: TEXT_PRIMARY, margin: '12px 0', lineHeight: 1, fontFamily: FONT_MONO }}>{value}</p>
+      <p style={{ fontWeight: 400, fontSize: 12, color: TEXT_MUTED, margin: 0, lineHeight: 1.5 }}>{caption}</p>
     </div>
   );
 }
