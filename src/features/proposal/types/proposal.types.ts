@@ -29,7 +29,6 @@ export interface SalaryTier {
 }
 
 export interface HealthSubBenefit {
-  participationRate: number;
   premiums: { individual: number; family: number };
 }
 
@@ -37,6 +36,7 @@ export interface BenefitsConfig {
   enabled: boolean;
   healthcare: {
     enabled: boolean;
+    participationRate: number;
     medical: HealthSubBenefit;
     dental: HealthSubBenefit;
     vision: HealthSubBenefit;

@@ -5,15 +5,15 @@ import { useProposalStore } from '@/features/proposal/store/proposal.store';
 import { SectionCard } from '@/features/proposal/components/shared/SectionCard';
 import { PercentInput } from '@/features/proposal/components/shared/PercentInput';
 import { DollarInput } from '@/features/proposal/components/shared/DollarInput';
-import type { HealthSubBenefit } from '@/features/proposal/types/proposal.types';
 
 const BENEFIT_TABS = ['Healthcare', 'Retirement', 'HSA'] as const;
 type BenefitTab = typeof BENEFIT_TABS[number];
 
-const HC_DEFAULTS: Record<'medical' | 'dental' | 'vision', HealthSubBenefit> = {
-  medical: { participationRate: 75, premiums: { individual: 200, family: 775 } },
-  dental:  { participationRate: 75, premiums: { individual: 35,  family: 85  } },
-  vision:  { participationRate: 75, premiums: { individual: 15,  family: 40  } },
+const HC_DEFAULTS = {
+  participationRate: 75,
+  medical: { premiums: { individual: 200, family: 775 } },
+  dental:  { premiums: { individual: 35,  family: 85  } },
+  vision:  { premiums: { individual: 15,  family: 40  } },
 };
 
 export function BenefitsSection() {
@@ -25,6 +25,7 @@ export function BenefitsSection() {
     setBenefits({
       healthcare: {
         ...benefits.healthcare,
+        participationRate: HC_DEFAULTS.participationRate,
         medical: HC_DEFAULTS.medical,
         dental: HC_DEFAULTS.dental,
         vision: HC_DEFAULTS.vision,
@@ -38,16 +39,11 @@ export function BenefitsSection() {
     });
   }, [benefits, setBenefits]);
 
-  const updateSubBenefit = useCallback(
-    (type: 'medical' | 'dental' | 'vision', field: 'participationRate' | 'individual' | 'family', val: number) => {
+  const updateSubBenefitPremium = useCallback(
+    (type: 'medical' | 'dental' | 'vision', field: 'individual' | 'family', val: number) => {
       const current = benefits.healthcare[type];
-      const updated: HealthSubBenefit =
-        field === 'participationRate'
-          ? { ...current, participationRate: val }
-          : { ...current, premiums: { ...current.premiums, [field]: val } };
-
       setBenefits({
-        healthcare: { ...benefits.healthcare, [type]: updated },
+        healthcare: { ...benefits.healthcare, [type]: { ...current, premiums: { ...current.premiums, [field]: val } } },
       });
     },
     [benefits.healthcare, setBenefits],
@@ -120,69 +116,71 @@ export function BenefitsSection() {
         {/* ── Healthcare Tab ── */}
         {activeTab === 'Healthcare' && (
           <div className="glass-secondary !rounded-[14px] !p-6" style={{ padding: 24 }}>
-            {/* Column headers */}
-            <div
-              className="grid items-end"
-              style={{
-                gridTemplateColumns: '100px 100px 1fr 1fr',
-                columnGap: 24,
-                marginBottom: 12,
-              }}
-            >
-              <div />
-              <div className="text-center text-[11px] font-semibold text-text-tertiary uppercase" style={{ letterSpacing: '0.5px' }}>
-                Participation
-              </div>
-              <div className="text-center text-[11px] font-semibold text-text-tertiary uppercase" style={{ letterSpacing: '0.5px' }}>
-                Individual
-              </div>
-              <div className="text-center text-[11px] font-semibold text-text-tertiary uppercase" style={{ letterSpacing: '0.5px' }}>
-                Family
-              </div>
+            {/* Participation Rate — single field at top */}
+            <div className="flex items-center" style={{ gap: 12, marginBottom: 20 }}>
+              <span className="text-[14px] font-medium text-text-primary">Participation Rate</span>
+              <PercentInput
+                value={benefits.healthcare.participationRate}
+                onChange={(val) => setBenefits({ healthcare: { ...benefits.healthcare, participationRate: val } })}
+              />
             </div>
 
-            {/* Rows */}
-            <div className="flex flex-col" style={{ gap: 16 }}>
-              {(['medical', 'dental', 'vision'] as const).map((type) => (
-                <div
-                  key={type}
-                  className="grid items-center"
-                  style={{ gridTemplateColumns: '100px 100px 1fr 1fr', columnGap: 24 }}
-                >
-                  <div className="text-[14px] font-medium text-text-primary capitalize">{type}</div>
-                  <div className="flex justify-center">
-                    <PercentInput
-                      value={benefits.healthcare[type].participationRate}
-                      onChange={(v) => updateSubBenefit(type, 'participationRate', v)}
-                    />
-                  </div>
-                  <div className="flex justify-center">
+            {/* Divider */}
+            <div style={{ height: 1, background: 'var(--color-border-glass-light, #E6EEF6)', marginBottom: 16 }} />
+
+            {/* Premium grid — constrained width, left-aligned */}
+            <div style={{ maxWidth: 520 }}>
+              {/* Column headers */}
+              <div
+                className="grid items-end"
+                style={{
+                  gridTemplateColumns: '110px 110px 110px',
+                  columnGap: 16,
+                  marginBottom: 8,
+                }}
+              >
+                <div />
+                <div className="text-[11px] font-semibold text-text-tertiary uppercase" style={{ letterSpacing: '0.5px' }}>
+                  INDIVIDUAL
+                </div>
+                <div className="text-[11px] font-semibold text-text-tertiary uppercase" style={{ letterSpacing: '0.5px' }}>
+                  FAMILY
+                </div>
+              </div>
+
+              {/* Rows: Medical, Dental, Vision — costs only */}
+              <div className="flex flex-col" style={{ gap: 12 }}>
+                {(['medical', 'dental', 'vision'] as const).map((type) => (
+                  <div
+                    key={type}
+                    className="grid items-center"
+                    style={{ gridTemplateColumns: '110px 110px 110px', columnGap: 16 }}
+                  >
+                    <div className="text-[14px] font-medium text-text-primary capitalize">{type}</div>
                     <DollarInput
                       value={benefits.healthcare[type].premiums.individual}
-                      onChange={(v) => updateSubBenefit(type, 'individual', v)}
+                      onChange={(v) => updateSubBenefitPremium(type, 'individual', v)}
                     />
-                  </div>
-                  <div className="flex justify-center">
                     <DollarInput
                       value={benefits.healthcare[type].premiums.family}
-                      onChange={(v) => updateSubBenefit(type, 'family', v)}
+                      onChange={(v) => updateSubBenefitPremium(type, 'family', v)}
                     />
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
 
-            {/* Single helper text */}
-            <p className="text-[11px] text-text-tertiary" style={{ marginTop: 16 }}>
-              Monthly premium per employee
-            </p>
+              {/* Single helper text */}
+              <p className="text-[11px] text-text-tertiary" style={{ marginTop: 12 }}>
+                Monthly premium per employee
+              </p>
+            </div>
           </div>
         )}
 
         {/* ── Retirement Tab ── */}
         {activeTab === 'Retirement' && (
           <div>
-            <div className="flex items-center gap-4 mb-6" style={{ maxWidth: 400 }}>
+            <div className="flex items-center" style={{ gap: 12, marginBottom: 16 }}>
               <span className="text-[14px] font-medium text-text-primary">Participation Rate</span>
               <PercentInput
                 value={benefits.retirement.participationRate}
@@ -192,7 +190,8 @@ export function BenefitsSection() {
 
             <button
               onClick={() => setShowRetirementTiers(!showRetirementTiers)}
-              className="inline-flex items-center gap-1.5 text-[13px] font-medium text-text-secondary hover:text-text-primary transition-colors mb-4"
+              className="inline-flex items-center gap-1.5 text-[13px] font-medium text-text-secondary hover:text-text-primary transition-colors"
+              style={{ marginBottom: 12 }}
             >
               <motion.span animate={{ rotate: showRetirementTiers ? 180 : 0 }} transition={{ duration: 0.2 }}>
                 <ChevronDown size={14} className="text-current" />
@@ -209,11 +208,11 @@ export function BenefitsSection() {
                   transition={{ duration: 0.2 }}
                   className="overflow-hidden"
                 >
-                  <div className="glass-secondary !rounded-[14px]">
-                    <div className="grid grid-cols-4 gap-4">
+                  <div className="glass-secondary !rounded-[14px]" style={{ maxWidth: 520 }}>
+                    <div className="grid grid-cols-4" style={{ gap: 12 }}>
                       {(['entry', 'mid', 'senior', 'executive'] as const).map((tier) => (
                         <div key={tier} className="text-center">
-                          <p className="text-[12px] font-medium text-text-secondary capitalize mb-2">{tier}</p>
+                          <p className="text-[12px] font-medium text-text-secondary capitalize" style={{ marginBottom: 6 }}>{tier}</p>
                           <PercentInput
                             value={benefits.retirement.contributionRates[tier]}
                             onChange={(val) =>
@@ -241,14 +240,14 @@ export function BenefitsSection() {
         {/* ── HSA Tab ── */}
         {activeTab === 'HSA' && (
           <div>
-            <div className="flex items-center gap-4" style={{ maxWidth: 400, marginBottom: 24 }}>
+            <div className="flex items-center" style={{ gap: 12, marginBottom: 12 }}>
               <span className="text-[14px] font-medium text-text-primary">Participation Rate</span>
               <PercentInput
                 value={benefits.hsa.participationRate}
                 onChange={(val) => setBenefits({ hsa: { ...benefits.hsa, participationRate: val } })}
               />
             </div>
-            <p className="text-[12px] text-text-tertiary italic" style={{ marginTop: 8 }}>
+            <p className="text-[12px] text-text-tertiary italic" style={{ marginTop: 0 }}>
               Savings estimate will use national average HSA contribution data.
             </p>
           </div>

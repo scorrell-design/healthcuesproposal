@@ -81,6 +81,20 @@ export function StateDistributionSection() {
           <Globe size={13} />
           Add All 50 States
         </button>
+        <button
+          onClick={distributeEvenly}
+          disabled={states.length === 0}
+          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-medium transition-colors ${states.length === 0 ? 'text-text-tertiary' : 'text-text-secondary hover:text-text-primary'}`}
+          style={{
+            background: '#F6F9FC',
+            border: '1px solid #E6EEF6',
+            opacity: states.length === 0 ? 0.5 : 1,
+            cursor: states.length === 0 ? 'not-allowed' : 'pointer',
+          }}
+        >
+          <RefreshCw size={13} className="text-current" />
+          Distribute Evenly
+        </button>
         {states.length > 0 && (
           <button
             onClick={clearAll}
@@ -114,18 +128,7 @@ export function StateDistributionSection() {
           ))}
 
           <div className="flex items-center justify-between pt-1">
-            <div className="flex items-center gap-3">
-              <TotalBadge value={totalPercent} target={100} />
-              {states.length >= 2 && (
-                <button
-                  onClick={distributeEvenly}
-                  className="glass-secondary inline-flex items-center gap-1.5 !rounded-full !px-3 !py-1.5 text-[13px] font-medium text-text-secondary hover:text-text-primary transition-colors"
-                >
-                  <RefreshCw size={14} className="text-current" />
-                  Distribute Evenly
-                </button>
-              )}
-            </div>
+            <TotalBadge value={totalPercent} target={100} />
             {states.length > 1 && Math.abs(totalPercent - 100) >= 0.5 && (
               <ValidationBanner type="warning" message="Distribution must total 100%" />
             )}

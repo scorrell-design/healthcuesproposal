@@ -47,7 +47,7 @@ export function analyzeEmployees(
           const sub = hc[key];
           const avgPremium = (sub.premiums.individual + sub.premiums.family) / 2;
           healthBenefits.push({
-            participationRate: sub.participationRate,
+            participationRate: hc.participationRate,
             premiumAnnual: avgPremium * 12,
           });
         }
